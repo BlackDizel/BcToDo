@@ -6,4 +6,6 @@ interface INavigator {
 
     fun set(viewId: Int, fragmentManager: FragmentManager)
     fun navigateListNotes()
+    fun navigateNoteAdd()
+    fun navigateNoteView()
 }
