@@ -27,6 +27,10 @@ class AppModule(val app: ApplicationToDo) {
     @Singleton
     fun getPresenterNoteCreate(): IPresenterNoteCreate = PresenterNoteCreate(app)
 
+    @Provides
+    @Singleton
+    fun getPresenterNoteView(): IPresenterNoteView = PresenterNoteView(app)
+
     //endregion
 
     //region caches

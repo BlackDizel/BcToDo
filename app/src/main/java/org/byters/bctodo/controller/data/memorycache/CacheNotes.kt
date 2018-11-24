@@ -2,7 +2,6 @@ package org.byters.bctodo.controller.data.memorycache
 
 import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
-import org.byters.bctodo.BuildConfig
 import org.byters.bctodo.controller.data.util.opt
 import org.byters.bctodo.model.ModelNote
 import org.byters.bctodo.model.ModelNoteCollection
@@ -14,7 +13,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
     var data: ModelNoteCollection? = null
 
-    private var selectedNote: String? = null
+    private var selectedNoteId: String? = null
 
     fun checkData(): ModelNoteCollection {
 
@@ -24,12 +23,6 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
         if (data == null) {
             data = ModelNoteCollection(null)
-
-            if (BuildConfig.DEBUG) {
-                add("Title1", "Body1")
-                add("Title2", "Body2")
-                add("Title3", "Body3")
-            }
         }
         return data!!
     }
@@ -63,7 +56,11 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     }
 
     override fun setSelectedNote(adapterPosition: Int) {
-        selectedNote = checkData().notes?.opt(adapterPosition)?.id
+        selectedNoteId = checkData().notes?.opt(adapterPosition)?.id
     }
+
+    override fun getBodySelected(): String? = checkData().notes?.find { it.id.equals(selectedNoteId) }?.body
+
+    override fun getTitleSelected(): String? = checkData().notes?.find { it.id.equals(selectedNoteId) }?.title
 
 }

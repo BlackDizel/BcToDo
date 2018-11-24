@@ -6,4 +6,6 @@ interface ICacheNotes {
 
     fun add(title: String?, body: String?)
     fun setSelectedNote(adapterPosition: Int)
+    fun getTitleSelected(): String?
+    fun getBodySelected(): String?
 }
