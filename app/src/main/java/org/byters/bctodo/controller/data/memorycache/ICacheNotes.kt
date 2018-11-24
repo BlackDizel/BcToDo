@@ -5,4 +5,5 @@ interface ICacheNotes {
     fun getItemTitleSingleLine(position: Int): String?
 
     fun add(title: String?, body: String?)
+    fun setSelectedNote(adapterPosition: Int)
 }

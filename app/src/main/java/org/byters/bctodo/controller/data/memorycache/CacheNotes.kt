@@ -6,12 +6,15 @@ import org.byters.bctodo.BuildConfig
 import org.byters.bctodo.controller.data.util.opt
 import org.byters.bctodo.model.ModelNote
 import org.byters.bctodo.model.ModelNoteCollection
+import java.util.*
 
 class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
 //TODO read write from disc
 
     var data: ModelNoteCollection? = null
+
+    private var selectedNote: String? = null
 
     fun checkData(): ModelNoteCollection {
 
@@ -37,7 +40,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
         if (checkData().notes == null)
             checkData().notes = ArrayList()
-        checkData().notes!!.add(ModelNote(title, body))
+        checkData().notes!!.add(ModelNote(UUID.randomUUID().toString(), title, body))
 
         saveData()
     }
@@ -59,5 +62,8 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
         return result
     }
 
+    override fun setSelectedNote(adapterPosition: Int) {
+        selectedNote = checkData().notes?.opt(adapterPosition)?.id
+    }
 
 }
