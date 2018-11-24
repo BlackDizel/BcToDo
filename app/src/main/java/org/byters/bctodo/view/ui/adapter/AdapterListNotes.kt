@@ -29,7 +29,7 @@ class AdapterListNotes(app: ApplicationToDo) : AdapterBase() {
 
         init {
             tvTitle = itemView.findViewById(R.id.tvTitle)
-            tvTitle.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun setData(position: Int) {
