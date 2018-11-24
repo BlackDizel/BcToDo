@@ -4,8 +4,11 @@ import dagger.Component
 import org.byters.bctodo.controller.AppModule
 import org.byters.bctodo.view.presenter.PresenterActivityMain
 import org.byters.bctodo.view.presenter.PresenterListNotesAdapter
+import org.byters.bctodo.view.presenter.PresenterNoteCreate
 import org.byters.bctodo.view.ui.activity.ActivityMain
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
+import org.byters.bctodo.view.ui.fragment.FragmentListNotes
+import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
 import javax.inject.Singleton
 
 @Component(modules = arrayOf(AppModule::class))
@@ -15,5 +18,8 @@ interface AppComponent {
     fun inject(param: PresenterActivityMain)
     fun inject(adapterListNotes: AdapterListNotes)
     fun inject(presenterListNotesAdapter: PresenterListNotesAdapter)
+    fun inject(fragmentNoteCreate: FragmentNoteCreate)
+    fun inject(presenterNoteCreate: PresenterNoteCreate)
+    fun inject(fragmentListNotes: FragmentListNotes)
 
 }

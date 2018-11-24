@@ -7,10 +7,7 @@ import org.byters.bctodo.controller.data.memorycache.CacheNotes
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.Navigator
-import org.byters.bctodo.view.presenter.IPresenterActivityMain
-import org.byters.bctodo.view.presenter.IPresenterListNotesAdapter
-import org.byters.bctodo.view.presenter.PresenterActivityMain
-import org.byters.bctodo.view.presenter.PresenterListNotesAdapter
+import org.byters.bctodo.view.presenter.*
 import javax.inject.Singleton
 
 @Module
@@ -25,6 +22,10 @@ class AppModule(val app: ApplicationToDo) {
     @Provides
     @Singleton
     fun getPresenterListNotesAdapter(): IPresenterListNotesAdapter = PresenterListNotesAdapter(app)
+
+    @Provides
+    @Singleton
+    fun getPresenterNoteCreate(): IPresenterNoteCreate = PresenterNoteCreate(app)
 
     //endregion
 
