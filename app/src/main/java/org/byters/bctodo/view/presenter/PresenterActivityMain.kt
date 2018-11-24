@@ -16,6 +16,11 @@ class PresenterActivityMain(app: ApplicationToDo) : IPresenterActivityMain {
 
     override fun onActivityCreate(flContent: Int, supportFragmentManager: FragmentManager) {
         navigator.set(flContent, supportFragmentManager)
+        navigate()
+    }
+
+    private fun navigate() {
+        navigator.navigateListNotes()
     }
 
 }

@@ -5,4 +5,5 @@ import androidx.fragment.app.FragmentManager
 interface INavigator {
 
     fun set(viewId: Int, fragmentManager: FragmentManager)
+    fun navigateListNotes()
 }
