@@ -8,9 +8,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
+import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
+import javax.inject.Inject
 
 class FragmentListNotes : FragmentBase(),View.OnClickListener  {
+
+    @Inject
+    lateinit var navigator: INavigator
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (context?.applicationContext as ApplicationToDo).component.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_list_notes, container, false)
@@ -28,7 +38,7 @@ class FragmentListNotes : FragmentBase(),View.OnClickListener  {
     }
 
     override fun onClick(v: View) {
-        //TODO open note create
+        navigator.navigateNoteAdd()
     }
 
 }
