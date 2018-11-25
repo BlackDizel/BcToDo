@@ -15,6 +15,7 @@
             android:layout_gravity="bottom|center"
             android:src="?drawableNoteAdd"
             android:id="@+id/ivAdd"
+            android:padding="12dp"
             android:layout_width="48dp"
             android:layout_height="48dp"/>
 
