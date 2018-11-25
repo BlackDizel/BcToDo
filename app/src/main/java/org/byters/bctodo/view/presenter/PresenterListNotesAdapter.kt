@@ -8,6 +8,7 @@ import org.byters.bctodo.model.StyleEnum
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterListNotesAdapterListener
 import java.lang.ref.WeakReference
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapter {
@@ -24,6 +25,8 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
     private var refListener: WeakReference<IPresenterListNotesAdapterListener>? = null
 
     private val listenerCacgeInterfaceState: ICacheInterfaceStateListener
+
+    private val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy MMM dd HH:mm")
 
     init {
         app.component.inject(this)
@@ -50,6 +53,12 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
     override fun getItemTitle(position: Int): String? = cacheNotes.getItemTitle(position)
 
     override fun getItemBody(position: Int): String? = cacheNotes.getItemBody(position)
+
+    override fun getItemDate(position: Int): String? {
+        val date = cacheNotes.getItemDate(position)
+        if (date == null) return null
+        return dateFormat.format(date)
+    }
 
     inner class ListenerCacheInterfaceState : ICacheInterfaceStateListener {
         override fun onStyleUpdate() {

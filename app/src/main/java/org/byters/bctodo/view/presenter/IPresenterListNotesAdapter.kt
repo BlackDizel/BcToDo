@@ -11,5 +11,6 @@ interface IPresenterListNotesAdapter {
     fun getStyle(): StyleEnum
     fun getItemTitle(position: Int): String?
     fun getItemBody(position: Int): String?
+    fun getItemDate(position: Int): String?
 
 }

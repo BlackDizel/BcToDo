@@ -12,4 +12,5 @@ interface ICacheNotes {
     fun editSelected(title: String, body: String)
     fun getItemTitle(position: Int): String?
     fun getItemBody(position: Int): String?
+    fun getItemDate(position: Int): Long?
 }

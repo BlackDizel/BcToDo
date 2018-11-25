@@ -41,7 +41,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
         if (checkData().notes == null)
             checkData().notes = ArrayList()
-        checkData().notes!!.add(ModelNote(UUID.randomUUID().toString(), title, body))
+        checkData().notes!!.add(ModelNote(UUID.randomUUID().toString(), title, body, System.currentTimeMillis()))
 
         saveData()
     }
@@ -86,5 +86,6 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     override fun getItemTitle(position: Int): String? = checkData().notes?.opt(position)?.title
 
     override fun getItemBody(position: Int): String? = checkData().notes?.opt(position)?.body
+    override fun getItemDate(position: Int): Long? = checkData().notes?.opt(position)?.date
 
 }

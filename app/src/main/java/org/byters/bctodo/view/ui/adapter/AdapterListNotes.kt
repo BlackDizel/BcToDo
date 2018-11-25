@@ -45,8 +45,16 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
     inner abstract class ViewHolderNoteBase(resId: Int, parent: ViewGroup) :
         ViewHolderBase(resId, parent), View.OnClickListener {
 
+        val tvDate: TextView
+
         init {
+            tvDate = itemView.findViewById(R.id.tvDate)
             itemView.setOnClickListener(this)
+        }
+
+        override fun setData(position: Int) {
+            val text = presenterListNotesAdapter.getItemDate(position)
+            tvDate.text = if (!TextUtils.isEmpty(text)) text else ""
         }
 
         override fun onClick(v: View?) {
@@ -65,6 +73,7 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
         }
 
         override fun setData(position: Int) {
+            super.setData(position)
             val text = presenterListNotesAdapter.getItemTitleSingleLine(position)
             tvTitle.text = if (!TextUtils.isEmpty(text)) text else ""
 
@@ -84,6 +93,7 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
         }
 
         override fun setData(position: Int) {
+            super.setData(position)
             val text = presenterListNotesAdapter.getItemTitle(position)
             tvTitle.text = if (!TextUtils.isEmpty(text)) text else ""
 
@@ -106,6 +116,7 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
         }
 
         override fun setData(position: Int) {
+            super.setData(position)
             val text = presenterListNotesAdapter.getItemTitle(position)
             tvTitle.text = if (!TextUtils.isEmpty(text)) text else ""
 
