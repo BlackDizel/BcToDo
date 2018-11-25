@@ -2,14 +2,22 @@ package org.byters.bctodo.controller.data.memorycache
 
 import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
+import org.byters.bctodo.controller.data.device.ICacheStorage
 import org.byters.bctodo.controller.data.util.opt
+import org.byters.bctodo.model.FileEnum
 import org.byters.bctodo.model.ModelNote
 import org.byters.bctodo.model.ModelNoteCollection
 import java.util.*
+import javax.inject.Inject
 
 class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
-//TODO read write from disc
+    @Inject
+    lateinit var cacheStorage: ICacheStorage
+
+    init {
+        app.component.inject(this)
+    }
 
     var data: ModelNoteCollection? = null
 
@@ -18,7 +26,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     fun checkData(): ModelNoteCollection {
 
         if (data == null) {
-            //todo try to read from disc
+            data = cacheStorage.readFile(FileEnum.CACHE_NOTES, ModelNoteCollection::class)
         }
 
         if (data == null) {
@@ -39,7 +47,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     }
 
     private fun saveData() {
-        //TODO implement
+        cacheStorage.writeData(checkData(), FileEnum.CACHE_NOTES)
     }
 
     override fun getItemsNum(): Int = checkData().notes?.size ?: 0

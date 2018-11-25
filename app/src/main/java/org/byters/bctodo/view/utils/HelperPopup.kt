@@ -17,15 +17,21 @@ class HelperPopup(app: ApplicationToDo) : IHelperPopup {
         app.component.inject(this)
     }
 
-
     override fun showToast(resid: Int) {
+        val context = refContext.get()
+        if (context == null) return
+        showToast(context.getString(resid))
+    }
+
+    override fun showToast(message: String) {
         val context = refContext.get()
         if (context == null) return
 
         toast?.cancel()
 
-        toast = Toast.makeText(context, resid, Toast.LENGTH_SHORT)
+        toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
         toast?.show()
+
 
     }
 

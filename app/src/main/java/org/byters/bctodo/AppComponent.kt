@@ -2,6 +2,8 @@ package org.byters.bctodo
 
 import dagger.Component
 import org.byters.bctodo.controller.AppModule
+import org.byters.bctodo.controller.data.device.CacheStorage
+import org.byters.bctodo.controller.data.memorycache.CacheNotes
 import org.byters.bctodo.view.presenter.*
 import org.byters.bctodo.view.ui.activity.ActivityMain
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
@@ -27,5 +29,7 @@ interface AppComponent {
     fun inject(helperPopup: HelperPopup)
     fun inject(fragmentNoteEdit: FragmentNoteEdit)
     fun inject(presenterNoteEdit: PresenterNoteEdit)
+    fun inject(cacheStorage: CacheStorage)
+    fun inject(cacheNotes: CacheNotes)
 
 }

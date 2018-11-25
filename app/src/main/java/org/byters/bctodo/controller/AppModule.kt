@@ -1,9 +1,12 @@
 package org.byters.bctodo.controller
 
 import android.content.Context
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import org.byters.bctodo.ApplicationToDo
+import org.byters.bctodo.controller.data.device.CacheStorage
+import org.byters.bctodo.controller.data.device.ICacheStorage
 import org.byters.bctodo.controller.data.memorycache.CacheNotes
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.view.INavigator
@@ -47,6 +50,10 @@ class AppModule(val app: ApplicationToDo) {
     @Singleton
     fun getCacheNotes(): ICacheNotes = CacheNotes(app)
 
+    @Provides
+    @Singleton
+    fun getCacheStorage(): ICacheStorage = CacheStorage(app)
+
     //endregion
 
 
@@ -61,5 +68,9 @@ class AppModule(val app: ApplicationToDo) {
     @Provides
     @Singleton
     fun getAppContext(): WeakReference<Context> = WeakReference(app)
+
+    @Provides
+    @Singleton
+    fun getGson(): Gson = Gson()
 
 }

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="org.byters.bctodo">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
             android:name=".ApplicationToDo"
             android:allowBackup="false"
@@ -11,6 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppThemeLight"
             tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".view.ui.activity.ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
