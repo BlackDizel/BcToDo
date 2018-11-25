@@ -9,4 +9,5 @@ interface ICacheNotes {
     fun getTitleSelected(): String?
     fun getBodySelected(): String?
     fun removeSelected()
+    fun editSelected(title: String, body: String)
 }

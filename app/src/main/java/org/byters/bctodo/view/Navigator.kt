@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentManager
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.view.ui.fragment.FragmentListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
+import org.byters.bctodo.view.ui.fragment.FragmentNoteEdit
 import org.byters.bctodo.view.ui.fragment.FragmentNoteView
 import java.lang.ref.WeakReference
 
@@ -48,6 +49,16 @@ class Navigator(app: ApplicationToDo) : INavigator {
         refFramgentManager.get()
             ?.beginTransaction()
             ?.replace(viewId, FragmentNoteView())
+            ?.addToBackStack(null)
+            ?.commit()
+    }
+
+    override fun navigateNoteEdit() {
+        if (refFramgentManager.get() == null) return
+
+        refFramgentManager.get()
+            ?.beginTransaction()
+            ?.replace(viewId, FragmentNoteEdit())
             ?.addToBackStack(null)
             ?.commit()
     }

@@ -5,5 +5,7 @@ import org.byters.bctodo.view.presenter.callback.IPresenterNoteViewListener
 interface IPresenterNoteView {
     fun setListener(listener: IPresenterNoteViewListener)
     fun onCreateView()
+    fun onClickEdit()
+    fun onClickDelete()
 
 }

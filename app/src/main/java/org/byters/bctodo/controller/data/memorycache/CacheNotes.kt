@@ -67,4 +67,11 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
         checkData().notes?.removeAll { it.id.equals(selectedNoteId) }
         saveData()
     }
+
+    override fun editSelected(title: String, body: String) {
+        val item = checkData().notes?.find { it.id.equals(selectedNoteId) } ?: return
+        item.title = title
+        item.body = body
+        saveData()
+    }
 }

@@ -33,6 +33,10 @@ class AppModule(val app: ApplicationToDo) {
 
     @Provides
     @Singleton
+    fun getPresenterNoteEdit(): IPresenterNoteEdit = PresenterNoteEdit(app)
+
+    @Provides
+    @Singleton
     fun getPresenterNoteView(): IPresenterNoteView = PresenterNoteView(app)
 
     //endregion

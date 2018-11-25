@@ -8,4 +8,5 @@ interface INavigator {
     fun navigateListNotes()
     fun navigateNoteAdd()
     fun navigateNoteView()
+    fun navigateNoteEdit()
 }
