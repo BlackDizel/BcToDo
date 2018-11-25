@@ -21,7 +21,7 @@
             android:id="@+id/tvSave"
             android:padding="16dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-            android:background="?selectableItemBackgroundBorderless"
+            android:background="?selectableItemBackground"
             android:text="@string/save"/>
 
 
