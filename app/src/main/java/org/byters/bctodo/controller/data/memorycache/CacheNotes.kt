@@ -82,4 +82,9 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
         item.body = body
         saveData()
     }
+
+    override fun getItemTitle(position: Int): String? = checkData().notes?.opt(position)?.title
+
+    override fun getItemBody(position: Int): String? = checkData().notes?.opt(position)?.body
+
 }

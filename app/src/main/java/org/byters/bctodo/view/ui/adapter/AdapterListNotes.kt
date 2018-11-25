@@ -4,32 +4,64 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
+import org.byters.bctodo.model.StyleEnum
 import org.byters.bctodo.view.presenter.IPresenterListNotesAdapter
+import org.byters.bctodo.view.presenter.callback.IPresenterListNotesAdapterListener
 import javax.inject.Inject
 
-class AdapterListNotes(app: ApplicationToDo) : AdapterBase() {
+class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : AdapterBase() {
 
     @Inject
     lateinit var presenterListNotesAdapter: IPresenterListNotesAdapter
 
+    private val listenerPresenter: AdapterListNotes.ListenerPresenter
+
     init {
         app.component.inject(this)
+        listenerPresenter = ListenerPresenter()
+        presenterListNotesAdapter.setListener(listenerPresenter)
+    }
+
+    inner class ListenerPresenter : IPresenterListNotesAdapterListener {
+
+        override fun onUpdateStyle() {
+            rvItems.removeAllViews()
+            notifyDataSetChanged()
+        }
     }
 
     override fun getItemCount(): Int = presenterListNotesAdapter.getItemsNum()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderBase = ViewHolderSingleLine(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderBase =
+        if (presenterListNotesAdapter.getStyle() == StyleEnum.SMALL)
+            ViewHolderSingleLine(parent)
+        else if (presenterListNotesAdapter.getStyle() == StyleEnum.MEDIUM)
+            ViewHolderMedium(parent)
+        else ViewHolderFull(parent)
+
+    inner abstract class ViewHolderNoteBase(resId: Int, parent: ViewGroup) :
+        ViewHolderBase(resId, parent), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            presenterListNotesAdapter.onClick(adapterPosition)
+        }
+
+    }
 
     inner class ViewHolderSingleLine(parent: ViewGroup) :
-        ViewHolderBase(R.layout.view_note_list_item_single_line, parent), View.OnClickListener {
+        ViewHolderNoteBase(R.layout.view_note_list_item_single_line, parent), View.OnClickListener {
 
         val tvTitle: TextView
 
         init {
             tvTitle = itemView.findViewById(R.id.tvTitle)
-            itemView.setOnClickListener(this)
         }
 
         override fun setData(position: Int) {
@@ -38,8 +70,48 @@ class AdapterListNotes(app: ApplicationToDo) : AdapterBase() {
 
         }
 
-        override fun onClick(v: View?) {
-            presenterListNotesAdapter.onClick(adapterPosition)
+    }
+
+    inner class ViewHolderMedium(parent: ViewGroup) :
+        ViewHolderNoteBase(R.layout.view_note_list_item_medium, parent), View.OnClickListener {
+
+        val tvTitle: TextView
+        val tvBody: TextView
+
+        init {
+            tvTitle = itemView.findViewById(R.id.tvTitle)
+            tvBody = itemView.findViewById(R.id.tvBody)
+        }
+
+        override fun setData(position: Int) {
+            val text = presenterListNotesAdapter.getItemTitle(position)
+            tvTitle.text = if (!TextUtils.isEmpty(text)) text else ""
+
+            val body = presenterListNotesAdapter.getItemBody(position)
+            tvBody.text = if (!TextUtils.isEmpty(body)) body else ""
+
+        }
+
+    }
+
+    inner class ViewHolderFull(parent: ViewGroup) :
+        ViewHolderNoteBase(R.layout.view_note_list_item_full, parent), View.OnClickListener {
+
+        val tvTitle: TextView
+        val tvBody: TextView
+
+        init {
+            tvTitle = itemView.findViewById(R.id.tvTitle)
+            tvBody = itemView.findViewById(R.id.tvBody)
+        }
+
+        override fun setData(position: Int) {
+            val text = presenterListNotesAdapter.getItemTitle(position)
+            tvTitle.text = if (!TextUtils.isEmpty(text)) text else ""
+
+            val body = presenterListNotesAdapter.getItemBody(position)
+            tvBody.text = if (!TextUtils.isEmpty(body)) body else ""
+
         }
 
     }

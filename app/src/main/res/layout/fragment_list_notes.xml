@@ -19,4 +19,15 @@
             android:layout_width="48dp"
             android:layout_height="48dp"/>
 
+
+    <ImageView
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_gravity="bottom"
+            android:src="?drawableListNotesStyle"
+            android:id="@+id/ivListNotesStyle"
+            android:padding="12dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
+
+
 </FrameLayout>

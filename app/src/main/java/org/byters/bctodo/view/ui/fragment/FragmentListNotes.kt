@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
-import org.byters.bctodo.view.INavigator
+import org.byters.bctodo.view.presenter.IPresenterListNotes
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
 import javax.inject.Inject
 
-class FragmentListNotes : FragmentBase(),View.OnClickListener  {
+class FragmentListNotes : FragmentBase(), View.OnClickListener {
 
     @Inject
-    lateinit var navigator: INavigator
+    lateinit var presenterListNotes: IPresenterListNotes
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +32,17 @@ class FragmentListNotes : FragmentBase(),View.OnClickListener  {
         val rvItems: RecyclerView = view.findViewById(R.id.rvItems)
         rvItems.layoutManager = LinearLayoutManager(context)
         rvItems.setHasFixedSize(true)
-        rvItems.adapter = AdapterListNotes(context!!.applicationContext as ApplicationToDo)
+        rvItems.adapter = AdapterListNotes(rvItems, context!!.applicationContext as ApplicationToDo)
 
         view.findViewById<View>(R.id.ivAdd).setOnClickListener(this)
+        view.findViewById<View>(R.id.ivListNotesStyle).setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
-        navigator.navigateNoteAdd()
+        if (v.id == R.id.ivAdd)
+            presenterListNotes.onClickAdd()
+        if (v.id == R.id.ivListNotesStyle)
+            presenterListNotes.onClickStyle()
     }
 
 }

@@ -31,5 +31,6 @@ interface AppComponent {
     fun inject(presenterNoteEdit: PresenterNoteEdit)
     fun inject(cacheStorage: CacheStorage)
     fun inject(cacheNotes: CacheNotes)
+    fun inject(presenterListNotes: PresenterListNotes)
 
 }
