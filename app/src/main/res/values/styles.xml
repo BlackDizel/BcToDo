@@ -5,7 +5,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="drawableNoteAdd">@drawable/ic_add_white_24dp</item>
+        <item name="drawableNoteAdd">@drawable/ic_add_black_24dp</item>
+        <item name="drawableNoteEdit">@drawable/ic_edit_black_24dp</item>
+        <item name="drawableNoteDelete">@drawable/ic_delete_black_24dp</item>
 
     </style>
 
@@ -14,7 +16,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="drawableNoteAdd">@drawable/ic_add_black_24dp</item>
+        <item name="drawableNoteAdd">@drawable/ic_add_white_24dp</item>
+        <item name="drawableNoteEdit">@drawable/ic_edit_white_24dp</item>
+        <item name="drawableNoteDelete">@drawable/ic_delete_white_24dp</item>
 
     </style>
 

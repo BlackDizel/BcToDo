@@ -2,5 +2,6 @@
 <resources>
 
     <attr name="drawableNoteAdd" format="reference"/>
-
+    <attr name="drawableNoteEdit" format="reference"/>
+    <attr name="drawableNoteDelete" format="reference"/>
 </resources>
