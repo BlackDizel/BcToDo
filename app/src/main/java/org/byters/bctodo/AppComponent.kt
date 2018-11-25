@@ -11,6 +11,7 @@ import org.byters.bctodo.view.ui.adapter.AdapterListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
 import org.byters.bctodo.view.ui.fragment.FragmentNoteView
+import org.byters.bctodo.view.utils.HelperPopup
 import javax.inject.Singleton
 
 @Component(modules = arrayOf(AppModule::class))
@@ -25,5 +26,6 @@ interface AppComponent {
     fun inject(fragmentListNotes: FragmentListNotes)
     fun inject(fragmentNoteView: FragmentNoteView)
     fun inject(presenterNoteView: PresenterNoteView)
+    fun inject(helperPopup: HelperPopup)
 
 }
