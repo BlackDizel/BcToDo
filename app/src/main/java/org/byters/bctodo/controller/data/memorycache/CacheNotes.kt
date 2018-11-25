@@ -63,4 +63,8 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
     override fun getTitleSelected(): String? = checkData().notes?.find { it.id.equals(selectedNoteId) }?.title
 
+    override fun removeSelected() {
+        checkData().notes?.removeAll { it.id.equals(selectedNoteId) }
+        saveData()
+    }
 }

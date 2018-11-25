@@ -8,4 +8,5 @@ interface ICacheNotes {
     fun setSelectedNote(adapterPosition: Int)
     fun getTitleSelected(): String?
     fun getBodySelected(): String?
+    fun removeSelected()
 }
