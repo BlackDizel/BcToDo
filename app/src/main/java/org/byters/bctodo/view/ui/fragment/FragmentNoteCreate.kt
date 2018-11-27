@@ -1,10 +1,12 @@
 package org.byters.bctodo.view.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.view.presenter.IPresenterNoteCreate
@@ -28,6 +30,7 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_note_create, container, false)
         initViews(view)
+        presenterNoteCreate.onCreateView()
         return view
     }
 
@@ -48,6 +51,15 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
         override fun finish() {
             if (!isAdded) return
             activity?.onBackPressed()
+        }
+
+        override fun setData(font: Typeface) {
+            setFont(etTitle, etBody, font = font)
+        }
+
+        fun setFont(vararg items: TextView, font: Typeface) {
+            items.forEach { it.setTypeface(font) }
+
         }
     }
 }

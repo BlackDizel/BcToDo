@@ -1,5 +1,6 @@
 package org.byters.bctodo.view.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -51,10 +52,15 @@ class FragmentNoteView : FragmentBase(), View.OnClickListener {
     }
 
     inner class PresenterListener : IPresenterNoteViewListener {
-        override fun setData(title: String?, body: String?) {
+        override fun setData(title: String?, body: String?, font:Typeface) {
             if (!isAdded) return
             tvTitle.text = if (TextUtils.isEmpty(title)) "" else title
             tvBody.text = if (TextUtils.isEmpty(body)) "" else body
+            setFont(tvTitle, tvBody, font=font)
+        }
+
+        fun setFont(vararg items: TextView, font: Typeface) {
+            items.forEach { it.setTypeface(font) }
 
         }
 

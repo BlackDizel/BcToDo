@@ -1,9 +1,12 @@
 package org.byters.bctodo.view.presenter
 
+import android.graphics.Typeface
 import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
+import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
+import org.byters.bctodo.model.FontEnum
 import org.byters.bctodo.view.presenter.callback.IPresenterNoteCreateListener
 import org.byters.bctodo.view.utils.IHelperPopup
 import java.lang.ref.WeakReference
@@ -16,6 +19,9 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
 
     @Inject
     lateinit var helperPopup: IHelperPopup
+
+    @Inject
+    lateinit var cacheInterfaceState: ICacheInterfaceState
 
     lateinit var refListener: WeakReference<IPresenterNoteCreateListener>
 
@@ -35,6 +41,11 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
 
     override fun setListener(listener: IPresenterNoteCreateListener) {
         refListener = WeakReference(listener)
+    }
+
+    override fun onCreateView() {
+        refListener?.get()
+            ?.setData(if (cacheInterfaceState.getFont() == FontEnum.SANS) Typeface.SANS_SERIF else Typeface.SERIF)
     }
 
 }
