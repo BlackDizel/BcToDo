@@ -41,20 +41,25 @@
     </LinearLayout>
 
     <LinearLayout
+            android:id="@+id/llPath"
+            android:visibility="gone"
             android:layout_margin="4dp"
             android:background="@drawable/bg_folder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <ImageView android:layout_width="48dp"
-                   android:layout_height="48dp"
-                   android:background="?selectableItemBackgroundBorderless"
-                   android:src="@drawable/ic_close_white_24dp"
-                   android:padding="12dp"
-                   android:tint="?tintDrawable"/>
+        <ImageView
+                android:id="@+id/vPathCancel"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_close_white_24dp"
+                android:padding="12dp"
+                android:tint="?tintDrawable"/>
 
         <TextView
+                android:id="@+id/tvPath"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
