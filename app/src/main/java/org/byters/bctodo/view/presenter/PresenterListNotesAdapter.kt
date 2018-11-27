@@ -31,7 +31,7 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
     init {
         app.component.inject(this)
         listenerCacgeInterfaceState = ListenerCacheInterfaceState()
-        cacheInterfaceState.setListener(listenerCacgeInterfaceState)
+        cacheInterfaceState.addListener(listenerCacgeInterfaceState)
     }
 
 

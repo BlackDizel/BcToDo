@@ -6,7 +6,6 @@ import org.byters.bctodo.view.INavigator
 import javax.inject.Inject
 
 class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
-
     @Inject
     lateinit var navigator: INavigator
 
@@ -24,5 +23,10 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
     override fun onClickStyle() {
         cacheInterfaceState.setStyleNext()
     }
+
+    override fun onClickTheme() {
+        cacheInterfaceState.setThemeNext()
+    }
+
 
 }

@@ -4,7 +4,7 @@
               android:orientation="horizontal"
               android:layout_gravity="bottom"
               android:layout_margin="4dp"
-              android:background="@drawable/bg_notes_styles">
+              android:background="?drawableBackgroundPopup">
 
     <ImageView
             android:tint="?tintDrawable"
@@ -16,6 +16,7 @@
             android:layout_height="48dp"/>
 
     <ImageView
+            android:id="@+id/ivFont"
             android:tint="?tintDrawable"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_text_fields_white_24dp"
@@ -24,6 +25,7 @@
             android:layout_height="48dp"/>
 
     <ImageView
+            android:id="@+id/ivTheme"
             android:tint="?tintDrawable"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_tonality_white_24dp"

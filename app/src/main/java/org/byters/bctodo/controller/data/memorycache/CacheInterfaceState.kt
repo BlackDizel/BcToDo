@@ -1,25 +1,27 @@
 package org.byters.bctodo.controller.data.memorycache
 
 import org.byters.bctodo.ApplicationToDo
-
 import org.byters.bctodo.controller.data.memorycache.callback.ICacheInterfaceStateListener
 import org.byters.bctodo.model.StyleEnum
-import java.lang.ref.WeakReference
+import org.byters.bctodo.model.ThemeEnum
+import java.util.*
 
 class CacheInterfaceState(app: ApplicationToDo) : ICacheInterfaceState {
 
-    private var refListener: WeakReference<ICacheInterfaceStateListener>? = null
-
     private var style: Int = 0
+    private var theme: ThemeEnum = ThemeEnum.LIGHT
+
+    private var listeners: WeakHashMap<String, ICacheInterfaceStateListener>? = null
 
     override fun setStyleNext() {
         this.style += 1
         style = style % 3
-        refListener?.get()?.onStyleUpdate()
+        listeners?.values?.forEach { it.onStyleUpdate() }
     }
 
-    override fun setListener(listener: ICacheInterfaceStateListener) {
-        refListener = WeakReference(listener)
+    override fun addListener(listener: ICacheInterfaceStateListener) {
+        if (listeners == null) listeners = WeakHashMap()
+        listeners!!.put(listener::class.java.name, listener)
     }
 
     override fun getStyle(): StyleEnum =
@@ -27,4 +29,10 @@ class CacheInterfaceState(app: ApplicationToDo) : ICacheInterfaceState {
         else if (style == 1) StyleEnum.MEDIUM
         else StyleEnum.FULL
 
+    override fun setThemeNext() {
+        theme = if (theme == ThemeEnum.LIGHT) ThemeEnum.DARK else ThemeEnum.LIGHT
+        listeners?.values?.forEach { it.onThemeUpdate() }
+    }
+
+    override fun getTheme(): ThemeEnum = theme
 }
