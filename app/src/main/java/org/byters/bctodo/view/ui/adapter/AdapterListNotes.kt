@@ -28,17 +28,18 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
     inner class ListenerPresenter : IPresenterListNotesAdapterListener {
 
         override fun onUpdateStyle() {
-            rvItems.removeAllViews()
             notifyDataSetChanged()
         }
     }
 
+    override fun getItemViewType(position: Int): Int = presenterListNotesAdapter.getStyle().type
+
     override fun getItemCount(): Int = presenterListNotesAdapter.getItemsNum()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderBase =
-        if (presenterListNotesAdapter.getStyle() == StyleEnum.SMALL)
+        if (viewType == StyleEnum.SMALL.type)
             ViewHolderSingleLine(parent)
-        else if (presenterListNotesAdapter.getStyle() == StyleEnum.MEDIUM)
+        else if (viewType == StyleEnum.MEDIUM.type)
             ViewHolderMedium(parent)
         else ViewHolderFull(parent)
 
