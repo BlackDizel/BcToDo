@@ -2,4 +2,5 @@
 <resources>
 
     <attr name="tintDrawable" format="color"/>
+    <attr name="drawableBackgroundPopup" format="reference"/>
 </resources>
