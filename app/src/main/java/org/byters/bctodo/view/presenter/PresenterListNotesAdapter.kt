@@ -4,6 +4,7 @@ import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.controller.data.memorycache.callback.ICacheInterfaceStateListener
+import org.byters.bctodo.model.FontEnum
 import org.byters.bctodo.model.StyleEnum
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterListNotesAdapterListener
@@ -65,6 +66,12 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
             refListener?.get()?.onUpdateStyle()
         }
 
+        override fun onFontUpdate() {
+            refListener?.get()?.onUpdateStyle()
+        }
+
     }
+
+    override fun getItemFont(): FontEnum = cacheInterfaceState.getFont()
 
 }

@@ -37,6 +37,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
         view.findViewById<View>(R.id.ivAdd).setOnClickListener(this)
         view.findViewById<View>(R.id.ivListNotesStyle).setOnClickListener(this)
         view.findViewById<View>(R.id.ivTheme).setOnClickListener(this)
+        view.findViewById<View>(R.id.ivFont).setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -46,6 +47,8 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
             presenterListNotes.onClickStyle()
         if (v.id == R.id.ivTheme)
             presenterListNotes.onClickTheme()
+        if (v.id == R.id.ivFont)
+            presenterListNotes.onClickFont()
     }
 
 }

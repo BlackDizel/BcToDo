@@ -4,5 +4,6 @@ interface IPresenterListNotes {
     fun onClickAdd()
     fun onClickStyle()
     fun onClickTheme()
+    fun onClickFont()
 
 }

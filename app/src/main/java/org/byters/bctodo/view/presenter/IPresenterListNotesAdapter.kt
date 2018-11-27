@@ -1,5 +1,6 @@
 package org.byters.bctodo.view.presenter
 
+import org.byters.bctodo.model.FontEnum
 import org.byters.bctodo.model.StyleEnum
 import org.byters.bctodo.view.presenter.callback.IPresenterListNotesAdapterListener
 
@@ -12,5 +13,6 @@ interface IPresenterListNotesAdapter {
     fun getItemTitle(position: Int): String?
     fun getItemBody(position: Int): String?
     fun getItemDate(position: Int): String?
+    fun getItemFont(): FontEnum
 
 }

@@ -6,6 +6,7 @@ import org.byters.bctodo.view.INavigator
 import javax.inject.Inject
 
 class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
+
     @Inject
     lateinit var navigator: INavigator
 
@@ -28,5 +29,8 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
         cacheInterfaceState.setThemeNext()
     }
 
+    override fun onClickFont() {
+        cacheInterfaceState.setFontNext()
+    }
 
 }

@@ -1,5 +1,6 @@
 package org.byters.bctodo.view.ui.adapter
 
+import android.graphics.Typeface
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
+import org.byters.bctodo.model.FontEnum
 import org.byters.bctodo.model.StyleEnum
 import org.byters.bctodo.view.presenter.IPresenterListNotesAdapter
 import org.byters.bctodo.view.presenter.callback.IPresenterListNotesAdapterListener
@@ -56,6 +58,12 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
         override fun setData(position: Int) {
             val text = presenterListNotesAdapter.getItemDate(position)
             tvDate.text = if (!TextUtils.isEmpty(text)) text else ""
+
+            setFont(tvDate)
+        }
+
+        fun setFont(textView: TextView){
+            textView.setTypeface(if (presenterListNotesAdapter.getItemFont() == FontEnum.SANS) Typeface.SANS_SERIF else Typeface.SERIF);
         }
 
         override fun onClick(v: View?) {
@@ -77,7 +85,7 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
             super.setData(position)
             val text = presenterListNotesAdapter.getItemTitleSingleLine(position)
             tvTitle.text = if (!TextUtils.isEmpty(text)) text else ""
-
+            setFont(tvTitle)
         }
 
     }
@@ -100,6 +108,8 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
 
             val body = presenterListNotesAdapter.getItemBody(position)
             tvBody.text = if (!TextUtils.isEmpty(body)) body else ""
+            setFont(tvTitle)
+            setFont(tvBody)
 
         }
 
@@ -123,6 +133,8 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
 
             val body = presenterListNotesAdapter.getItemBody(position)
             tvBody.text = if (!TextUtils.isEmpty(body)) body else ""
+            setFont(tvTitle)
+            setFont(tvBody)
 
         }
 
