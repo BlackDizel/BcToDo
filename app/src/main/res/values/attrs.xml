@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="drawableNoteAdd" format="reference"/>
-    <attr name="drawableNoteEdit" format="reference"/>
-    <attr name="drawableNoteDelete" format="reference"/>
-    <attr name="drawableListNotesStyle" format="reference"/>
+    <attr name="tintDrawable" format="color"/>
 </resources>

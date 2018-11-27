@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
              android:orientation="vertical"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginBottom="48dp"
-            android:id="@+id/rvItems"
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <include layout="@layout/view_toolbar_notes"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvItems"
+                tools:listitem="@layout/view_note_list_item_single_line"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
     <ImageView
-            android:background="?selectableItemBackgroundBorderless"
-            android:layout_gravity="bottom|center"
-            android:src="?drawableNoteAdd"
+            android:background="@drawable/bg_circle_accent"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_add_white_24dp"
             android:id="@+id/ivAdd"
             android:padding="12dp"
+            android:layout_margin="16dp"
             android:layout_width="48dp"
             android:layout_height="48dp"/>
 
-
-    <ImageView
-            android:background="?selectableItemBackgroundBorderless"
-            android:layout_gravity="bottom"
-            android:src="?drawableListNotesStyle"
-            android:id="@+id/ivListNotesStyle"
-            android:padding="12dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp"/>
-
+    <include layout="@layout/view_notes_options"/>
 
 </FrameLayout>

@@ -38,7 +38,8 @@
         <ImageView
                 android:background="?selectableItemBackgroundBorderless"
                 android:id="@+id/ivEdit"
-                android:src="?drawableNoteEdit"
+                android:src="@drawable/ic_edit_white_24dp"
+                android:tint="?tintDrawable"
                 android:padding="12dp"
                 android:layout_width="48dp"
                 android:layout_height="48dp"/>
@@ -46,7 +47,8 @@
         <ImageView
                 android:background="?selectableItemBackgroundBorderless"
                 android:id="@+id/ivDelete"
-                android:src="?drawableNoteDelete"
+                android:tint="?tintDrawable"
+                android:src="@drawable/ic_delete_white_24dp"
                 android:padding="12dp"
                 android:layout_width="48dp"
                 android:layout_height="48dp"/>
