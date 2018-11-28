@@ -2,6 +2,7 @@ package org.byters.bctodo.controller.data.memorycache
 
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.BuildConfig
+import org.byters.bctodo.controller.data.memorycache.callback.ICacheTagListener
 import org.byters.bctodo.controller.data.util.opt
 import org.byters.bctodo.model.ModelTag
 import org.byters.bctodo.model.ModelTagsCollection
@@ -10,6 +11,8 @@ import java.util.*
 class CacheTags(app: ApplicationToDo) : ICacheTags {
 
     var data: ModelTagsCollection? = null
+
+    private var listeners: WeakHashMap<String, ICacheTagListener>? = null
 
     init {
 
@@ -29,4 +32,22 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
 
     override fun isSelected(position: Int): Boolean = data?.tags?.opt(position)?.isSelected ?: false
 
+    override fun setSelected(position: Int, param: Boolean) {
+        data?.tags?.opt(position)?.isSelected = param
+        notifyListeners()
+    }
+
+    override fun setSelectedWithoutTag(param: Boolean) {
+        data?.isSelectedWithoutTag = param
+        notifyListeners()
+    }
+
+    private fun notifyListeners() {
+        listeners?.values?.forEach { it.onDataUpdate() }
+    }
+
+    override fun addListener(listener: ICacheTagListener) {
+        if (listeners == null) listeners = WeakHashMap()
+        listeners!!.put(listener::class.java.name, listener)
+    }
 }

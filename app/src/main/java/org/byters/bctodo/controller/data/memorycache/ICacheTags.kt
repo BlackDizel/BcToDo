@@ -1,9 +1,14 @@
 package org.byters.bctodo.controller.data.memorycache
 
+import org.byters.bctodo.controller.data.memorycache.callback.ICacheTagListener
+
 interface ICacheTags {
     fun getItemsNum(): Int
     fun getItemTitle(position: Int): String
     fun isSelectedWithoutTag(): Boolean
     fun isSelected(position: Int): Boolean
+    fun setSelectedWithoutTag(param: Boolean)
+    fun setSelected(position: Int, param: Boolean)
+    fun addListener(listener: ICacheTagListener)
 
 }
