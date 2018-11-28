@@ -10,5 +10,5 @@ interface ICacheTags {
     fun setSelectedWithoutTag(param: Boolean)
     fun setSelected(position: Int, param: Boolean)
     fun addListener(listener: ICacheTagListener)
-
+    fun getSelectedIds(): Iterable<String>?
 }

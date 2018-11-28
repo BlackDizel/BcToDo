@@ -8,6 +8,8 @@ import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.device.CacheStorage
 import org.byters.bctodo.controller.data.device.ICacheStorage
 import org.byters.bctodo.controller.data.memorycache.*
+import org.byters.bctodo.controller.data.util.HelperNotesSelected
+import org.byters.bctodo.controller.data.util.IHelperNotesSelected
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.Navigator
 import org.byters.bctodo.view.presenter.*
@@ -79,6 +81,10 @@ class AppModule(val app: ApplicationToDo) {
     @Provides
     @Singleton
     fun getHelperPopup(): IHelperPopup = HelperPopup(app)
+
+    @Provides
+    @Singleton
+    fun getHelperNotesSelected(): IHelperNotesSelected = HelperNotesSelected(app)
 
     @Provides
     @Singleton

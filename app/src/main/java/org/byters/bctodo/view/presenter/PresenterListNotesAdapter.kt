@@ -2,8 +2,9 @@ package org.byters.bctodo.view.presenter
 
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
-import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.controller.data.memorycache.callback.ICacheInterfaceStateListener
+import org.byters.bctodo.controller.data.util.IHelperNotesSelected
+import org.byters.bctodo.controller.data.util.callback.IHelperNotesSelectedListener
 import org.byters.bctodo.model.FontEnum
 import org.byters.bctodo.model.StyleEnum
 import org.byters.bctodo.view.INavigator
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapter {
 
     @Inject
-    lateinit var cacheNotes: ICacheNotes
+    lateinit var helperNotesSelected: IHelperNotesSelected
 
     @Inject
     lateinit var navigator: INavigator
@@ -25,14 +26,24 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
 
     private var refListener: WeakReference<IPresenterListNotesAdapterListener>? = null
 
-    private val listenerCacgeInterfaceState: ICacheInterfaceStateListener
+    private val listenerCacheInterfaceState: ICacheInterfaceStateListener
 
     private val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy MMM dd HH:mm")
 
+    private var listenerHelperNotes: IHelperNotesSelectedListener
+
     init {
         app.component.inject(this)
-        listenerCacgeInterfaceState = ListenerCacheInterfaceState()
-        cacheInterfaceState.addListener(listenerCacgeInterfaceState)
+        listenerCacheInterfaceState = ListenerCacheInterfaceState()
+        cacheInterfaceState.addListener(listenerCacheInterfaceState)
+        listenerHelperNotes = ListenerHelperNotes()
+        helperNotesSelected.setListener(listenerHelperNotes)
+    }
+
+    inner class ListenerHelperNotes : IHelperNotesSelectedListener {
+        override fun onDataUpdated() {
+            refListener?.get()?.onUpdateStyle()
+        }
     }
 
 
@@ -40,23 +51,23 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
         refListener = WeakReference(listenerPresenter)
     }
 
-    override fun getItemsNum(): Int = cacheNotes.getItemsNum()
+    override fun getItemsNum(): Int = helperNotesSelected.getItemsNum()
 
-    override fun getItemTitleSingleLine(position: Int): String? = cacheNotes.getItemTitleSingleLine(position)
+    override fun getItemTitleSingleLine(position: Int): String? = helperNotesSelected.getItemTitleSingleLine(position)
 
     override fun onClick(adapterPosition: Int) {
-        cacheNotes.setSelectedNote(adapterPosition)
+        helperNotesSelected.setSelectedNote(adapterPosition)
         navigator.navigateNoteView()
     }
 
     override fun getStyle(): StyleEnum = cacheInterfaceState.getStyle()
 
-    override fun getItemTitle(position: Int): String? = cacheNotes.getItemTitle(position)
+    override fun getItemTitle(position: Int): String? = helperNotesSelected.getItemTitle(position)
 
-    override fun getItemBody(position: Int): String? = cacheNotes.getItemBody(position)
+    override fun getItemBody(position: Int): String? = helperNotesSelected.getItemBody(position)
 
     override fun getItemDate(position: Int): String? {
-        val date = cacheNotes.getItemDate(position)
+        val date = helperNotesSelected.getItemDate(position)
         if (date == null) return null
         return dateFormat.format(date)
     }

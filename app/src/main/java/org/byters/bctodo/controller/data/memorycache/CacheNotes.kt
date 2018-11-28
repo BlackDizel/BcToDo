@@ -1,8 +1,8 @@
 package org.byters.bctodo.controller.data.memorycache
 
-import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.device.ICacheStorage
+import org.byters.bctodo.controller.data.util.getTitleSingleLine
 import org.byters.bctodo.controller.data.util.opt
 import org.byters.bctodo.model.FileEnum
 import org.byters.bctodo.model.ModelNote
@@ -52,16 +52,15 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
     override fun getItemsNum(): Int = checkData().notes?.size ?: 0
 
-    override fun getItemTitleSingleLine(position: Int): String? {
-        val note = checkData().notes?.opt(position) ?: return null
-        var result = ""
-
-        if (!TextUtils.isEmpty(note.title))
-            result += note.title + " "
-        if (!TextUtils.isEmpty(note.body))
-            result += note.body
-        return result
+    override fun getItems(selectedIds: Iterable<String>?, selectedWithoutTag: Boolean): List<ModelNote>? {
+        return checkData().notes?.filter {
+            selectedIds != null && (it.tags?.intersect(selectedIds)?.any() ?: false)
+                    || selectedWithoutTag && (it.tags?.size == 0 || it.tags == null)
+        }?.toList()
     }
+
+    override fun getItemTitleSingleLine(position: Int): String? = checkData().notes?.opt(position)?.getTitleSingleLine()
+
 
     override fun setSelectedNote(adapterPosition: Int) {
         selectedNoteId = checkData().notes?.opt(adapterPosition)?.id

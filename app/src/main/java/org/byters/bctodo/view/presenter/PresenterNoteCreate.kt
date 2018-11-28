@@ -23,7 +23,7 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
     @Inject
     lateinit var cacheInterfaceState: ICacheInterfaceState
 
-    lateinit var refListener: WeakReference<IPresenterNoteCreateListener>
+    var refListener: WeakReference<IPresenterNoteCreateListener>? = null
 
     init {
         app.component.inject(this)
@@ -35,7 +35,7 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
             return
         }
         cacheNotes.add(title, body)
-        refListener.get()?.finish()
+        refListener?.get()?.finish()
     }
 
 

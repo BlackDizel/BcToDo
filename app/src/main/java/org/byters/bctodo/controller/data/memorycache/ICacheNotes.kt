@@ -1,5 +1,7 @@
 package org.byters.bctodo.controller.data.memorycache
 
+import org.byters.bctodo.model.ModelNote
+
 interface ICacheNotes {
     fun getItemsNum(): Int
     fun getItemTitleSingleLine(position: Int): String?
@@ -13,4 +15,5 @@ interface ICacheNotes {
     fun getItemTitle(position: Int): String?
     fun getItemBody(position: Int): String?
     fun getItemDate(position: Int): Long?
+    fun getItems(selectedIds: Iterable<String>?, selectedWithoutTag: Boolean): List<ModelNote>?
 }

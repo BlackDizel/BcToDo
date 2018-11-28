@@ -4,6 +4,7 @@ import dagger.Component
 import org.byters.bctodo.controller.AppModule
 import org.byters.bctodo.controller.data.device.CacheStorage
 import org.byters.bctodo.controller.data.memorycache.CacheNotes
+import org.byters.bctodo.controller.data.util.HelperNotesSelected
 import org.byters.bctodo.view.presenter.*
 import org.byters.bctodo.view.ui.activity.ActivityMain
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
@@ -35,5 +36,6 @@ interface AppComponent {
     fun inject(presenterListNotes: PresenterListNotes)
     fun inject(adapterTags: AdapterTags)
     fun inject(presenterTagsAdapter: PresenterTagsAdapter)
+    fun inject(helperNotesSelected: HelperNotesSelected)
 
 }

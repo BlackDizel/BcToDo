@@ -46,6 +46,12 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
         listeners?.values?.forEach { it.onDataUpdate() }
     }
 
+    override fun getSelectedIds(): Iterable<String>? {
+        return data?.tags?.filter {
+            it.isSelected
+        }?.map { it.id }
+    }
+
     override fun addListener(listener: ICacheTagListener) {
         if (listeners == null) listeners = WeakHashMap()
         listeners!!.put(listener::class.java.name, listener)
