@@ -63,7 +63,11 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
 
     override fun setSelectedNote(adapterPosition: Int) {
-        selectedNoteId = checkData().notes?.opt(adapterPosition)?.id
+        setSelectedNote(checkData().notes?.opt(adapterPosition)?.id)
+    }
+
+    override fun setSelectedNote(id: String?) {
+        selectedNoteId = id
     }
 
     override fun getBodySelected(): String? = checkData().notes?.find { it.id.equals(selectedNoteId) }?.body

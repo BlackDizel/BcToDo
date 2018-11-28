@@ -32,25 +32,23 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     override fun getItemsNum(): Int = getItems()?.size ?: 0
 
-    private fun getItems(): List<ModelNote>? {
+    private fun getItems(): List<ModelNote> {
         if (data == null)
             data = cacheNotes.getItems(cacheTags.getSelectedIds(), cacheTags.isSelectedWithoutTag())
         if (data == null)
             data = ArrayList()
-        return data
+        return data!!
     }
 
-    override fun getItemTitleSingleLine(position: Int): String? = getItems()?.opt(position)?.getTitleSingleLine()
+    override fun getItemTitleSingleLine(position: Int): String? = getItems().opt(position)?.getTitleSingleLine()
 
-    override fun setSelectedNote(adapterPosition: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun setSelectedNote(adapterPosition: Int) = cacheNotes.setSelectedNote(getItems().opt(adapterPosition)?.id)
 
-    override fun getItemTitle(position: Int): String? = getItems()?.opt(position)?.title
+    override fun getItemTitle(position: Int): String? = getItems().opt(position)?.title
 
-    override fun getItemBody(position: Int): String? = getItems()?.opt(position)?.body
+    override fun getItemBody(position: Int): String? = getItems().opt(position)?.body
 
-    override fun getItemDate(position: Int): Long? = getItems()?.opt(position)?.date
+    override fun getItemDate(position: Int): Long? = getItems().opt(position)?.date
 
     override fun setListener(listenerHelperNotes: IHelperNotesSelectedListener) {
         refListener = WeakReference(listenerHelperNotes)
