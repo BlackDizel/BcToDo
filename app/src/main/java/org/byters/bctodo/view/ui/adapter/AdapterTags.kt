@@ -57,6 +57,7 @@ class AdapterTags(app: ApplicationToDo) : AdapterBase() {
         override fun setData(position: Int) {
             val title = presenterTagsAdapter.getItemTitle(position)
             tvTitle.setText(if (TextUtils.isEmpty(title)) "" else title)
+            tvTitle.setBackgroundResource(if (presenterTagsAdapter.isSelected(position)) R.drawable.bg_tag_selected else R.drawable.bg_tag_deselected)
         }
     }
 
@@ -70,6 +71,7 @@ class AdapterTags(app: ApplicationToDo) : AdapterBase() {
 
         override fun setData(position: Int) {
             tvTitle.setText(R.string.title_tag_other)
+            tvTitle.setBackgroundResource(if (presenterTagsAdapter.isSelected(position)) R.drawable.bg_tag_selected else R.drawable.bg_tag_deselected)
         }
     }
 

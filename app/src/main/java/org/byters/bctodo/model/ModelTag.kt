@@ -1,5 +1,7 @@
 package org.byters.bctodo.model
 
-data class ModelTag(val id: String, val title: String) {
+import java.util.*
+
+data class ModelTag(val id: String = UUID.randomUUID().toString(), val title: String, var isSelected: Boolean = true) {
 
 }

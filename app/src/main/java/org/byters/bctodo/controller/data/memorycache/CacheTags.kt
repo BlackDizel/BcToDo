@@ -13,17 +13,20 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
 
     init {
 
-        if (BuildConfig.DEBUG)
-        {
+        if (BuildConfig.DEBUG) {
             data = ModelTagsCollection(ArrayList())
-            data!!.tags.add(ModelTag(UUID.randomUUID().toString(), "todo"))
-            data!!.tags.add(ModelTag(UUID.randomUUID().toString(), "work"))
-            data!!.tags.add(ModelTag(UUID.randomUUID().toString(), "other"))
+            data!!.tags.add(ModelTag(title = "todo"))
+            data!!.tags.add(ModelTag(title = "work"))
+            data!!.tags.add(ModelTag(title = "other"))
         }
     }
 
     override fun getItemsNum(): Int = data?.tags?.size ?: 0
 
     override fun getItemTitle(position: Int): String = data?.tags?.opt(position)?.title ?: ""
+
+    override fun isSelectedWithoutTag(): Boolean = data?.isSelectedWithoutTag ?: false
+
+    override fun isSelected(position: Int): Boolean = data?.tags?.opt(position)?.isSelected ?: false
 
 }

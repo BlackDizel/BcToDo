@@ -7,5 +7,6 @@ interface IPresenterTagsAdapter {
     fun onClickHeader()
     fun getItemTitle(position: Int): String
     fun getTypeOther(): Int
+    fun isSelected(position: Int): Boolean
 
 }
