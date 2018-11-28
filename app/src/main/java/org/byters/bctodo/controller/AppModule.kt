@@ -7,10 +7,7 @@ import dagger.Provides
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.device.CacheStorage
 import org.byters.bctodo.controller.data.device.ICacheStorage
-import org.byters.bctodo.controller.data.memorycache.CacheInterfaceState
-import org.byters.bctodo.controller.data.memorycache.CacheNotes
-import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
-import org.byters.bctodo.controller.data.memorycache.ICacheNotes
+import org.byters.bctodo.controller.data.memorycache.*
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.Navigator
 import org.byters.bctodo.view.presenter.*
@@ -48,6 +45,10 @@ class AppModule(val app: ApplicationToDo) {
     @Singleton
     fun getPresenterListNotes(): IPresenterListNotes = PresenterListNotes(app)
 
+    @Provides
+    @Singleton
+    fun getPresenterTagsAdapter(): IPresenterTagsAdapter = PresenterTagsAdapter(app)
+
     //endregion
 
     //region caches
@@ -63,6 +64,10 @@ class AppModule(val app: ApplicationToDo) {
     @Provides
     @Singleton
     fun getCacheInterfaceState(): ICacheInterfaceState = CacheInterfaceState(app)
+
+    @Provides
+    @Singleton
+    fun getCacheTags(): ICacheTags = CacheTags(app)
 
     //endregion
 

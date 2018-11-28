@@ -10,6 +10,7 @@ import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.view.presenter.IPresenterListNotes
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
+import org.byters.bctodo.view.ui.adapter.AdapterTags
 import javax.inject.Inject
 
 class FragmentListNotes : FragmentBase(), View.OnClickListener {
@@ -38,6 +39,12 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
         view.findViewById<View>(R.id.ivListNotesStyle).setOnClickListener(this)
         view.findViewById<View>(R.id.ivTheme).setOnClickListener(this)
         view.findViewById<View>(R.id.ivFont).setOnClickListener(this)
+
+        view.findViewById<RecyclerView>(R.id.rvTags).apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            adapter = AdapterTags(context!!.applicationContext as ApplicationToDo)
+        }
     }
 
     override fun onClick(v: View) {

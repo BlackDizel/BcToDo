@@ -9,4 +9,5 @@ interface INavigator {
     fun navigateNoteAdd()
     fun navigateNoteView()
     fun navigateNoteEdit()
+    fun navigateTagList()
 }

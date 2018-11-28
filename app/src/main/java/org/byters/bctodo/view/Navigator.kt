@@ -63,4 +63,8 @@ class Navigator(app: ApplicationToDo) : INavigator {
             ?.commit()
     }
 
+    override fun navigateTagList() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

@@ -7,6 +7,7 @@ import org.byters.bctodo.controller.data.memorycache.CacheNotes
 import org.byters.bctodo.view.presenter.*
 import org.byters.bctodo.view.ui.activity.ActivityMain
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
+import org.byters.bctodo.view.ui.adapter.AdapterTags
 import org.byters.bctodo.view.ui.fragment.FragmentListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
 import org.byters.bctodo.view.ui.fragment.FragmentNoteEdit
@@ -32,5 +33,7 @@ interface AppComponent {
     fun inject(cacheStorage: CacheStorage)
     fun inject(cacheNotes: CacheNotes)
     fun inject(presenterListNotes: PresenterListNotes)
+    fun inject(adapterTags: AdapterTags)
+    fun inject(presenterTagsAdapter: PresenterTagsAdapter)
 
 }
