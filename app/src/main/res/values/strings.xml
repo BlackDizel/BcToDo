@@ -3,5 +3,6 @@
     <string name="save">save</string>
     <string name="note_empty">Wouldn\'t save empty note</string>
     <string name="error_json_parse_format" formatted="false">Json file parse error %s\nbackup is %s</string>
+    <string name="title_tag_other">Without tag</string>
 
 </resources>

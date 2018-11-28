@@ -19,19 +19,22 @@ class PresenterTagsAdapter(app: ApplicationToDo) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0) getTypeHeader() else TypeEnum.ITEM.type
+        return if (position == 0) getTypeHeader()
+        else if (position == getItemsNum() - 1) getTypeOther()
+        else TypeEnum.ITEM.type
     }
 
     override fun getTypeHeader(): Int = TypeEnum.HEADER.type
+    override fun getTypeOther(): Int = TypeEnum.OTHER.type
 
-    override fun getItemsNum(): Int = cacheTags.getItemsNum() + 1
+    override fun getItemsNum(): Int = cacheTags.getItemsNum() + 2
 
     override fun onClickHeader() = navigator.navigateTagList()
 
     override fun getItemTitle(position: Int): String = cacheTags.getItemTitle(position - 1)
 
     enum class TypeEnum(val type: Int) {
-        HEADER(1), ITEM(2)
+        HEADER(1), ITEM(2), OTHER(3)
     }
 
 }

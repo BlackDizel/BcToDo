@@ -6,5 +6,6 @@ interface IPresenterTagsAdapter {
     fun getTypeHeader(): Int
     fun onClickHeader()
     fun getItemTitle(position: Int): String
+    fun getTypeOther(): Int
 
 }

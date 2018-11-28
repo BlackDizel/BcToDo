@@ -23,6 +23,8 @@ class AdapterTags(app: ApplicationToDo) : AdapterBase() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderBase {
         if (viewType == presenterTagsAdapter.getTypeHeader())
             return ViewHolderTagHeader(parent)
+        if (viewType == presenterTagsAdapter.getTypeOther())
+            return ViewHolderTagOther(parent)
         else return ViewHolderTagItem(parent)
     }
 
@@ -56,7 +58,19 @@ class AdapterTags(app: ApplicationToDo) : AdapterBase() {
             val title = presenterTagsAdapter.getItemTitle(position)
             tvTitle.setText(if (TextUtils.isEmpty(title)) "" else title)
         }
+    }
 
+    inner class ViewHolderTagOther(parent: ViewGroup) : ViewHolderBase(R.layout.view_tag_list_item, parent) {
+
+        val tvTitle: TextView
+
+        init {
+            tvTitle = itemView.findViewById(R.id.tvTitle)
+        }
+
+        override fun setData(position: Int) {
+            tvTitle.setText(R.string.title_tag_other)
+        }
     }
 
 }
