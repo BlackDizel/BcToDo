@@ -26,6 +26,15 @@
                 android:padding="12dp"
                 android:background="?selectableItemBackgroundBorderless"/>
 
+        <ImageView
+                android:src="@drawable/ic_tag_white_24dp"
+                android:tint="?tintDrawable"
+                android:id="@+id/ivTags"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:background="?selectableItemBackgroundBorderless"/>
+
         <View android:layout_height="match_parent" android:layout_width="0dp"
               android:layout_weight="1"/>
 
