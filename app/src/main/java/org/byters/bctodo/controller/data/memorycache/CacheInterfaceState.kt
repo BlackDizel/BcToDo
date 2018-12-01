@@ -12,6 +12,7 @@ class CacheInterfaceState(app: ApplicationToDo) : ICacheInterfaceState {
     private var style: Int = 0
     private var theme: ThemeEnum = ThemeEnum.LIGHT
     private var font: FontEnum = FontEnum.SANS
+    private var isTagsVisible: Boolean = false
 
     private var listeners: WeakHashMap<String, ICacheInterfaceStateListener>? = null
 
@@ -44,5 +45,11 @@ class CacheInterfaceState(app: ApplicationToDo) : ICacheInterfaceState {
     }
 
     override fun getFont(): FontEnum = font
+
+    override fun isTagsVisible(): Boolean = isTagsVisible
+
+    override fun setTagsVisibility(value: Boolean) {
+        isTagsVisible = value
+    }
 
 }

@@ -14,4 +14,6 @@ interface ICacheInterfaceState {
     fun getTheme(): ThemeEnum
     fun setFontNext()
     fun getFont(): FontEnum
+    fun isTagsVisible(): Boolean
+    fun setTagsVisibility(value: Boolean)
 }
