@@ -6,10 +6,12 @@
 
     <EditText
             android:id="@+id/etTitle"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     <EditText
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:id="@+id/etBody"
             android:layout_width="match_parent"
             android:layout_height="0dp"
