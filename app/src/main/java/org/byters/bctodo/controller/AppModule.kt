@@ -13,7 +13,9 @@ import org.byters.bctodo.controller.data.util.IHelperNotesSelected
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.Navigator
 import org.byters.bctodo.view.presenter.*
+import org.byters.bctodo.view.utils.HelperDialog
 import org.byters.bctodo.view.utils.HelperPopup
+import org.byters.bctodo.view.utils.IHelperDialog
 import org.byters.bctodo.view.utils.IHelperPopup
 import java.lang.ref.WeakReference
 import javax.inject.Singleton
@@ -55,6 +57,11 @@ class AppModule(val app: ApplicationToDo) {
     @Singleton
     fun getPresenterNoteCreateTagsAdapter(): IPresenterNoteCreateTagsAdapter = PresenterNoteCreateTagsAdapter(app)
 
+    @Provides
+    @Singleton
+    fun getPresenterDialogTagsAdapter(): IPresenterDialogTagListAdapter=
+        org.byters.bctodo.view.presenter.PresenterDialogTagListAdapter(app)
+
     //endregion
 
     //region caches
@@ -89,6 +96,10 @@ class AppModule(val app: ApplicationToDo) {
     @Provides
     @Singleton
     fun getHelperPopup(): IHelperPopup = HelperPopup(app)
+
+    @Provides
+    @Singleton
+    fun getHelperDialogs(): IHelperDialog = HelperDialog(app)
 
     @Provides
     @Singleton

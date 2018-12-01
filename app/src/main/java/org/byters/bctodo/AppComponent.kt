@@ -6,8 +6,10 @@ import org.byters.bctodo.controller.data.device.CacheStorage
 import org.byters.bctodo.controller.data.memorycache.CacheNotes
 import org.byters.bctodo.controller.data.memorycache.CacheTags
 import org.byters.bctodo.controller.data.util.HelperNotesSelected
+import org.byters.bctodo.view.Navigator
 import org.byters.bctodo.view.presenter.*
 import org.byters.bctodo.view.ui.activity.ActivityMain
+import org.byters.bctodo.view.ui.adapter.AdapterDialogListTags
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
 import org.byters.bctodo.view.ui.adapter.AdapterTags
 import org.byters.bctodo.view.ui.adapter.AdapterTagsNoteCreate
@@ -15,6 +17,7 @@ import org.byters.bctodo.view.ui.fragment.FragmentListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
 import org.byters.bctodo.view.ui.fragment.FragmentNoteEdit
 import org.byters.bctodo.view.ui.fragment.FragmentNoteView
+import org.byters.bctodo.view.utils.HelperDialog
 import org.byters.bctodo.view.utils.HelperPopup
 import javax.inject.Singleton
 
@@ -42,5 +45,9 @@ interface AppComponent {
     fun inject(adapterTagsNoteCreate: AdapterTagsNoteCreate)
     fun inject(presenterNoteCreateTagsAdapter: PresenterNoteCreateTagsAdapter)
     fun inject(cacheTags: CacheTags)
+    fun inject(navigator: Navigator)
+    fun inject(helperDialog: HelperDialog)
+    fun inject(adapterDialogListTags: AdapterDialogListTags)
+    fun inject(presenterDialogTagListAdapter: PresenterDialogTagListAdapter)
 
 }

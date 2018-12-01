@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:paddingEnd="56dp"
+             android:id="@+id/flContent"
+             android:background="#aa000000"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:background="?drawableBackgroundPopup"
+            android:id="@+id/rvItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</FrameLayout>

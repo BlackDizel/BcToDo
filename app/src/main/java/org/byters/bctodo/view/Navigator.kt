@@ -6,14 +6,19 @@ import org.byters.bctodo.view.ui.fragment.FragmentListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
 import org.byters.bctodo.view.ui.fragment.FragmentNoteEdit
 import org.byters.bctodo.view.ui.fragment.FragmentNoteView
+import org.byters.bctodo.view.utils.IHelperDialog
 import java.lang.ref.WeakReference
+import javax.inject.Inject
 
 class Navigator(app: ApplicationToDo) : INavigator {
 
     //TODO implement cusom back stack
 
-    init {
+    @Inject
+    lateinit var helperDialog: IHelperDialog
 
+    init {
+        app.component.inject(this)
     }
 
     var viewId: Int = 0
@@ -64,7 +69,7 @@ class Navigator(app: ApplicationToDo) : INavigator {
     }
 
     override fun navigateTagList() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        helperDialog.showDialogTagList()
     }
 
 }

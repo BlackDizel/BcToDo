@@ -30,7 +30,7 @@ class HelperNotesSelected(app: ApplicationToDo) :
         cacheTags.addListener(listenerCacheTags)
     }
 
-    override fun getItemsNum(): Int = getItems()?.size ?: 0
+    override fun getItemsNum(): Int = getItems().size
 
     private fun getItems(): List<ModelNote> {
         if (data == null)

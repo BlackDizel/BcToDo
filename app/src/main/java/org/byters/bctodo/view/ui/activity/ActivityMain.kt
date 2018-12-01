@@ -26,7 +26,7 @@ class ActivityMain : ActivityBase() {
 
         setContentView(R.layout.activity_main)
 
-        presenterActivityMain.onActivityCreate(R.id.flContent, supportFragmentManager);
+        presenterActivityMain.onActivityCreate(this, R.id.flContent, supportFragmentManager);
 
     }
 
