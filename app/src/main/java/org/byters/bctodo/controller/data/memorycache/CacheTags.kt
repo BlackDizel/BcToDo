@@ -1,44 +1,71 @@
 package org.byters.bctodo.controller.data.memorycache
 
 import org.byters.bctodo.ApplicationToDo
-import org.byters.bctodo.BuildConfig
+import org.byters.bctodo.controller.data.device.ICacheStorage
 import org.byters.bctodo.controller.data.memorycache.callback.ICacheTagListener
 import org.byters.bctodo.controller.data.util.opt
+import org.byters.bctodo.model.FileEnum
 import org.byters.bctodo.model.ModelTag
 import org.byters.bctodo.model.ModelTagsCollection
 import java.util.*
+import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class CacheTags(app: ApplicationToDo) : ICacheTags {
+
+    @Inject
+    lateinit var cacheStorage: ICacheStorage
 
     var data: ModelTagsCollection? = null
 
     private var listeners: WeakHashMap<String, ICacheTagListener>? = null
 
     init {
-
-        if (BuildConfig.DEBUG) {
-            data = ModelTagsCollection(ArrayList())
-            data!!.tags.add(ModelTag(title = "todo"))
-            data!!.tags.add(ModelTag(title = "work"))
-            data!!.tags.add(ModelTag(title = "other"))
-        }
+        app.component.inject(this)
     }
 
-    override fun getItemsNum(): Int = data?.tags?.size ?: 0
+    private fun checkData(): ModelTagsCollection {
+        if (data == null) data = cacheStorage.readFile(FileEnum.CACHE_TAGS, ModelTagsCollection::class)
+        if (data == null) data = ModelTagsCollection()
+        return data!!
+    }
 
-    override fun getItemTitle(position: Int): String = data?.tags?.opt(position)?.title ?: ""
+    override fun addTag(title: String) {
+        if (checkData().tags == null)
+            checkData().tags = ArrayList()
+        checkData().tags!!.add(ModelTag(title = title))
+        saveData()
+        notifyListeners()
+    }
 
-    override fun isSelectedWithoutTag(): Boolean = data?.isSelectedWithoutTag ?: false
+    override fun removeTag(id: String) {
+        val tag: ModelTag? = checkData().tags?.filter { it.id.equals(id) }?.first()
+        if (tag == null) return
+        if (!checkData().tags!!.remove(tag)) return
+        saveData()
+        notifyListeners()
+    }
 
-    override fun isSelected(position: Int): Boolean = data?.tags?.opt(position)?.isSelected ?: false
+    private fun saveData() {
+        if (data == null) return
+        cacheStorage.writeData(data!!, FileEnum.CACHE_TAGS)
+    }
+
+    override fun getItemsNum(): Int = checkData().tags?.size ?: 0
+
+    override fun getItemTitle(position: Int): String = checkData().tags?.opt(position)?.title ?: ""
+
+    override fun isSelectedWithoutTag(): Boolean = checkData().isSelectedWithoutTag
+
+    override fun isSelected(position: Int): Boolean = checkData().tags?.opt(position)?.isSelected ?: false
 
     override fun setSelected(position: Int, param: Boolean) {
-        data?.tags?.opt(position)?.isSelected = param
+        checkData().tags?.opt(position)?.isSelected = param
         notifyListeners()
     }
 
     override fun setSelectedWithoutTag(param: Boolean) {
-        data?.isSelectedWithoutTag = param
+        checkData().isSelectedWithoutTag = param
         notifyListeners()
     }
 
@@ -47,11 +74,11 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
     }
 
     override fun getSelectedIds(): Iterable<String>? =
-        data?.tags?.filter {
+        checkData().tags?.filter {
             it.isSelected
         }?.map { it.id }
 
-    override fun getId(position: Int): String? = data?.tags?.opt(position)?.id
+    override fun getId(position: Int): String? = checkData().tags?.opt(position)?.id
 
     override fun addListener(listener: ICacheTagListener) {
         if (listeners == null) listeners = WeakHashMap()

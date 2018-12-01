@@ -12,4 +12,6 @@ interface ICacheTags {
     fun addListener(listener: ICacheTagListener)
     fun getSelectedIds(): Iterable<String>?
     fun getId(position: Int): String?
+    fun addTag(title: String)
+    fun removeTag(id: String)
 }

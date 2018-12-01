@@ -1,5 +1,5 @@
 package org.byters.bctodo.model
 
-data class ModelTagsCollection(val tags: ArrayList<ModelTag>, var isSelectedWithoutTag: Boolean = true) {
+data class ModelTagsCollection(var tags: ArrayList<ModelTag>? = null, var isSelectedWithoutTag: Boolean = true) {
 
 }
