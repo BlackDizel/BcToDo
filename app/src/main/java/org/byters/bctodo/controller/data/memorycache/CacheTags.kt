@@ -46,11 +46,12 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
         listeners?.values?.forEach { it.onDataUpdate() }
     }
 
-    override fun getSelectedIds(): Iterable<String>? {
-        return data?.tags?.filter {
+    override fun getSelectedIds(): Iterable<String>? =
+        data?.tags?.filter {
             it.isSelected
         }?.map { it.id }
-    }
+
+    override fun getId(position: Int): String? = data?.tags?.opt(position)?.id
 
     override fun addListener(listener: ICacheTagListener) {
         if (listeners == null) listeners = WeakHashMap()

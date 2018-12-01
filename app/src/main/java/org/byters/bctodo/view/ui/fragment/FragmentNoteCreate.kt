@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.view.presenter.IPresenterNoteCreate
 import org.byters.bctodo.view.presenter.callback.IPresenterNoteCreateListener
+import org.byters.bctodo.view.ui.adapter.AdapterTagsNoteCreate
 import javax.inject.Inject
 
 class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
@@ -41,6 +44,12 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
         etTitle = view.findViewById(R.id.etTitle)
         etBody = view.findViewById(R.id.etBody)
         view.findViewById<View>(R.id.tvSave).setOnClickListener(this)
+
+        view.findViewById<RecyclerView>(R.id.rvTags).apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            adapter = AdapterTagsNoteCreate(context.applicationContext as ApplicationToDo)
+        }
     }
 
     override fun onClick(v: View?) {

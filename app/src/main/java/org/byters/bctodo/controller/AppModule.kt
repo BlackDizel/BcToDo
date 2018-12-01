@@ -51,6 +51,10 @@ class AppModule(val app: ApplicationToDo) {
     @Singleton
     fun getPresenterTagsAdapter(): IPresenterTagsAdapter = PresenterTagsAdapter(app)
 
+    @Provides
+    @Singleton
+    fun getPresenterNoteCreateTagsAdapter(): IPresenterNoteCreateTagsAdapter = PresenterNoteCreateTagsAdapter(app)
+
     //endregion
 
     //region caches
@@ -70,6 +74,10 @@ class AppModule(val app: ApplicationToDo) {
     @Provides
     @Singleton
     fun getCacheTags(): ICacheTags = CacheTags(app)
+
+    @Provides
+    @Singleton
+    fun getCacheNoteCreate(): ICacheNoteCreate = CacheNoteCreate(app)
 
     //endregion
 
