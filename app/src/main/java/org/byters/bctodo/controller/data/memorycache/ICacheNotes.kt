@@ -6,7 +6,7 @@ interface ICacheNotes {
     fun getItemsNum(): Int
     fun getItemTitleSingleLine(position: Int): String?
 
-    fun add(title: String?, body: String?)
+    fun add(title: String?, body: String?, selectedIds: List<String>?)
     fun setSelectedNote(adapterPosition: Int)
     fun getTitleSelected(): String?
     fun getBodySelected(): String?

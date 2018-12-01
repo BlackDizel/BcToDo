@@ -5,6 +5,7 @@ import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
+import org.byters.bctodo.controller.data.memorycache.ICacheNoteCreate
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.model.FontEnum
 import org.byters.bctodo.view.presenter.callback.IPresenterNoteCreateListener
@@ -23,6 +24,9 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
     @Inject
     lateinit var cacheInterfaceState: ICacheInterfaceState
 
+    @Inject
+    lateinit var cacheNoteCreate: ICacheNoteCreate
+
     var refListener: WeakReference<IPresenterNoteCreateListener>? = null
 
     init {
@@ -34,7 +38,7 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
             helperPopup.showToast(R.string.note_empty);
             return
         }
-        cacheNotes.add(title, body)
+        cacheNotes.add(title, body, cacheNoteCreate.getSelectedIds())
         refListener?.get()?.finish()
     }
 

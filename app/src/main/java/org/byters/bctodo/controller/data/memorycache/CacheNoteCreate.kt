@@ -16,4 +16,6 @@ class CacheNoteCreate(app: ApplicationToDo) : ICacheNoteCreate {
         else selectedIds!!.remove(id)
     }
 
+    override fun getSelectedIds(): List<String>? = selectedIds?.toList()
+
 }

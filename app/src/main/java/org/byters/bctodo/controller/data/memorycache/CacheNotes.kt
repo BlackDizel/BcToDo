@@ -36,12 +36,12 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     }
 
 
-    override fun add(title: String?, body: String?) {
+    override fun add(title: String?, body: String?, selectedIds: List<String>?) {
         if (title == null && body == null) return
 
         if (checkData().notes == null)
             checkData().notes = ArrayList()
-        checkData().notes!!.add(ModelNote(UUID.randomUUID().toString(), title, body, System.currentTimeMillis()))
+        checkData().notes!!.add(ModelNote(UUID.randomUUID().toString(), title, body, System.currentTimeMillis(), selectedIds))
 
         saveData()
     }
