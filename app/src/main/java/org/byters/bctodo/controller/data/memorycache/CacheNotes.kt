@@ -23,6 +23,8 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
     private var selectedNoteId: String? = null
 
+    private var listeners: WeakHashMap<String, ICacheNotesListener>? = null
+
     fun checkData(): ModelNoteCollection {
 
         if (data == null) {
@@ -41,9 +43,27 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
         if (checkData().notes == null)
             checkData().notes = ArrayList()
-        checkData().notes!!.add(ModelNote(UUID.randomUUID().toString(), title, body, System.currentTimeMillis(), selectedIds))
+        checkData().notes!!.add(
+            ModelNote(
+                UUID.randomUUID().toString(),
+                title,
+                body,
+                System.currentTimeMillis(),
+                selectedIds
+            )
+        )
 
         saveData()
+        notifyListeners()
+    }
+
+    override fun addListener(listener: ICacheNotesListener) {
+        if (listeners == null) listeners = WeakHashMap()
+        listeners!!.put(listener::class.java.name, listener)
+    }
+
+    private fun notifyListeners() {
+        listeners?.values?.forEach { it.onDataUpdate() }
     }
 
     private fun saveData() {
@@ -77,6 +97,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     override fun removeSelected() {
         checkData().notes?.removeAll { it.id.equals(selectedNoteId) }
         saveData()
+        notifyListeners()
     }
 
     override fun editSelected(title: String, body: String) {
@@ -84,6 +105,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
         item.title = title
         item.body = body
         saveData()
+        notifyListeners()
     }
 
     override fun getItemTitle(position: Int): String? = checkData().notes?.opt(position)?.title

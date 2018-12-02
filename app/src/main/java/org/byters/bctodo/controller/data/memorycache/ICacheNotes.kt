@@ -17,4 +17,5 @@ interface ICacheNotes {
     fun getItemDate(position: Int): Long?
     fun getItems(selectedIds: Iterable<String>?, selectedWithoutTag: Boolean): List<ModelNote>?
     fun setSelectedNote(id: String?)
+    fun addListener(listenerCacheNotes: ICacheNotesListener)
 }

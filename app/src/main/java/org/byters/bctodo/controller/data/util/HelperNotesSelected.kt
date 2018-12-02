@@ -2,6 +2,7 @@ package org.byters.bctodo.controller.data.util
 
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
+import org.byters.bctodo.controller.data.memorycache.ICacheNotesListener
 import org.byters.bctodo.controller.data.memorycache.ICacheTags
 import org.byters.bctodo.controller.data.memorycache.callback.ICacheTagListener
 import org.byters.bctodo.controller.data.util.callback.IHelperNotesSelectedListener
@@ -20,6 +21,8 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     private val listenerCacheTags: ICacheTagListener
 
+    private var listenerCacheNotes: ICacheNotesListener
+
     private var data: List<ModelNote>? = null
 
     private var refListener: WeakReference<IHelperNotesSelectedListener>? = null
@@ -28,6 +31,8 @@ class HelperNotesSelected(app: ApplicationToDo) :
         app.component.inject(this)
         listenerCacheTags = ListenerCacheTags()
         cacheTags.addListener(listenerCacheTags)
+        listenerCacheNotes = ListenerCacheNotes()
+        cacheNotes.addListener(listenerCacheNotes)
     }
 
     override fun getItemsNum(): Int = getItems().size
@@ -55,6 +60,14 @@ class HelperNotesSelected(app: ApplicationToDo) :
     }
 
     inner class ListenerCacheTags : ICacheTagListener {
+        override fun onDataUpdate() {
+            data = null
+            refListener?.get()?.onDataUpdated()
+        }
+    }
+
+
+    inner class ListenerCacheNotes : ICacheNotesListener {
         override fun onDataUpdate() {
             data = null
             refListener?.get()?.onDataUpdated()
