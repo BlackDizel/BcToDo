@@ -58,8 +58,7 @@ class CacheStorage(app: ApplicationToDo) : ICacheStorage {
     }
 
     private fun showMessageFileError(file: String, filenameOut: String) {
-        val format = refContext.get()?.resources?.getString(R.string.error_json_parse_format)
-        if (format == null) return
+        val format = refContext.get()?.resources?.getString(R.string.error_json_parse_format) ?: return
         helperPopup.showToast(String.format(format, file, filenameOut))
     }
 
@@ -74,7 +73,7 @@ class CacheStorage(app: ApplicationToDo) : ICacheStorage {
         file.writeText(gson.toJson(data))
     }
 
-    fun getAppFolder(): String {
+    private fun getAppFolder(): String {
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + File.separator + BuildConfig.APPLICATION_ID
     }
 
