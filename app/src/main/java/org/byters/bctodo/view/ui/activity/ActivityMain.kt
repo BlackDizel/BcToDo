@@ -30,6 +30,16 @@ class ActivityMain : ActivityBase() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenterActivityMain.onResume(this)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        presenterActivityMain.onPermissionResult(requestCode, permissions, grantResults)
+    }
+
     inner class ListenerPresenter : IPresenterActivityMainListener {
         override fun restart() {
             this@ActivityMain.finish()

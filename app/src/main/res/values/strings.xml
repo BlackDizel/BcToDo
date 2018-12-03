@@ -5,5 +5,7 @@
     <string name="error_json_parse_format" formatted="false">Json file parse error %s\nbackup is %s</string>
     <string name="title_tag_other">Without tag</string>
     <string name="error_tag_title_empty">Wouldn\'t create empty tag</string>
+    <string name="error_permission">Can\'t read or write notes</string>
+    <string name="retry">Retry</string>
 
 </resources>

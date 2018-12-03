@@ -2,10 +2,7 @@ package org.byters.bctodo.view
 
 import androidx.fragment.app.FragmentManager
 import org.byters.bctodo.ApplicationToDo
-import org.byters.bctodo.view.ui.fragment.FragmentListNotes
-import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
-import org.byters.bctodo.view.ui.fragment.FragmentNoteEdit
-import org.byters.bctodo.view.ui.fragment.FragmentNoteView
+import org.byters.bctodo.view.ui.fragment.*
 import org.byters.bctodo.view.utils.IHelperDialog
 import java.lang.ref.WeakReference
 import javax.inject.Inject
@@ -70,6 +67,19 @@ class Navigator(app: ApplicationToDo) : INavigator {
 
     override fun navigateTagList() {
         helperDialog.showDialogTagList()
+    }
+
+    override fun navigteErrorPermission() {
+        if (refFramgentManager.get() == null) return
+
+        //TODO clear backstack
+        refFramgentManager.get()
+            ?.beginTransaction()
+            ?.replace(viewId, FragmentErrorPermission())
+            ?.commit()
+    }
+
+    override fun navigateCurrent() {
     }
 
 }
