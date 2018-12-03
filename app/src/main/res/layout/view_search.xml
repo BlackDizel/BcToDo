@@ -1,0 +1,43 @@
+<merge
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <FrameLayout
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:id="@+id/flSearch"
+            android:layout_marginEnd="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+                android:tint="?tintDrawable"
+                android:src="@drawable/ic_close_white_24dp"
+                android:id="@+id/ivSearchCancel"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"/>
+
+        <EditText
+                android:id="@+id/etSearch"
+                android:inputType="text"
+                android:lines="1"
+                android:layout_marginStart="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <ImageView
+            android:tint="?tintDrawable"
+            android:src="@drawable/ic_search_white_24dp"
+            android:id="@+id/ivSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:padding="12dp"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+</merge>

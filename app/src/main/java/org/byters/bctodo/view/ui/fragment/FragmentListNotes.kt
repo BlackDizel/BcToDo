@@ -12,6 +12,8 @@ import org.byters.bctodo.view.presenter.IPresenterListNotes
 import org.byters.bctodo.view.presenter.callback.IPresenterListNotesListener
 import org.byters.bctodo.view.ui.adapter.AdapterListNotes
 import org.byters.bctodo.view.ui.adapter.AdapterTags
+import org.byters.bctodo.view.ui.view.ViewSearch
+import org.byters.bctodo.view.ui.view.callback.IViewSearchListener
 import javax.inject.Inject
 
 class FragmentListNotes : FragmentBase(), View.OnClickListener {
@@ -20,6 +22,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
     lateinit var presenterListNotes: IPresenterListNotes
 
     private var rvTags: RecyclerView? = null
+    private var vNotesFilter: View? = null
 
     private lateinit var listenerPresenter: IPresenterListNotesListener
 
@@ -49,7 +52,11 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
         view.findViewById<View>(R.id.ivFont).setOnClickListener(this)
         view.findViewById<View>(R.id.ivTags).setOnClickListener(this)
 
-        rvTags = view.findViewById<RecyclerView>(R.id.rvTags)
+        view.findViewById<ViewSearch>(R.id.vSearch).setListener(ListenerSearch())
+
+        vNotesFilter = view.findViewById(R.id.llNotesFilter)
+
+        rvTags = view.findViewById(R.id.rvTags)
         rvTags!!.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
@@ -76,6 +83,21 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
             if (!isAdded) return
             rvTags!!.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
+    }
+
+    inner class ListenerSearch : IViewSearchListener {
+        override fun onHide() {
+            vNotesFilter!!.visibility = View.VISIBLE
+        }
+
+        override fun onShow() {
+            vNotesFilter!!.visibility = View.GONE
+        }
+
+        override fun onQuery(query: String?) {
+            //todo request search
+        }
+
     }
 
 }

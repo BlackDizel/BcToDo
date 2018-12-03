@@ -3,51 +3,53 @@
        xmlns:app="http://schemas.android.com/apk/res-auto"
        tools:showIn="@layout/fragment_list_notes">
 
-    <LinearLayout
-            android:orientation="horizontal"
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <ImageView
-                android:id="@+id/ivFolders"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="12dp"
-                android:tint="?tintDrawable"
-                android:src="@drawable/ic_menu_white_24dp"
-                android:background="?selectableItemBackgroundBorderless"/>
+        <LinearLayout
+                android:id="@+id/llNotesFilter"
+                tools:visibility="gone"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <ImageView
-                android:src="@drawable/ic_date_range_white_24dp"
-                android:tint="?tintDrawable"
-                android:id="@+id/ivCalendar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="12dp"
-                android:background="?selectableItemBackgroundBorderless"/>
+            <ImageView
+                    android:id="@+id/ivFolders"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="12dp"
+                    android:tint="?tintDrawable"
+                    android:src="@drawable/ic_menu_white_24dp"
+                    android:background="?selectableItemBackgroundBorderless"/>
 
-        <ImageView
-                android:src="@drawable/ic_tag_white_24dp"
-                android:tint="?tintDrawable"
-                android:id="@+id/ivTags"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="12dp"
-                android:background="?selectableItemBackgroundBorderless"/>
+            <ImageView
+                    android:src="@drawable/ic_date_range_white_24dp"
+                    android:tint="?tintDrawable"
+                    android:id="@+id/ivCalendar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="12dp"
+                    android:background="?selectableItemBackgroundBorderless"/>
 
-        <View android:layout_height="match_parent" android:layout_width="0dp"
-              android:layout_weight="1"/>
+            <ImageView
+                    android:src="@drawable/ic_tag_white_24dp"
+                    android:tint="?tintDrawable"
+                    android:id="@+id/ivTags"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="12dp"
+                    android:background="?selectableItemBackgroundBorderless"/>
 
-        <ImageView
-                android:tint="?tintDrawable"
-                android:src="@drawable/ic_search_white_24dp"
-                android:id="@+id/ivSearch"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:padding="12dp"
-                android:background="?selectableItemBackgroundBorderless"/>
-    </LinearLayout>
+        </LinearLayout>
+
+
+        <org.byters.bctodo.view.ui.view.ViewSearch
+                android:id="@+id/vSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </FrameLayout>
 
     <LinearLayout
             android:id="@+id/llPath"
