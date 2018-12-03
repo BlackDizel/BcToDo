@@ -1,5 +1,6 @@
 package org.byters.bctodo.controller.data.memorycache
 
+import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.device.ICacheStorage
 import org.byters.bctodo.controller.data.util.getTitleSingleLine
@@ -72,10 +73,17 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
     override fun getItemsNum(): Int = checkData().notes?.size ?: 0
 
-    override fun getItems(selectedIds: Iterable<String>?, selectedWithoutTag: Boolean): List<ModelNote>? {
+    override fun getItems(
+        selectedIds: Iterable<String>?,
+        selectedWithoutTag: Boolean,
+        query: String?
+    ): List<ModelNote>? {
         return checkData().notes?.filter {
-            selectedIds != null && (it.tags?.intersect(selectedIds)?.any() ?: false)
-                    || selectedWithoutTag && (it.tags?.size == 0 || it.tags == null)
+            (selectedIds != null && (it.tags?.intersect(selectedIds)?.any() ?: false)
+                    || selectedWithoutTag && (it.tags?.size == 0 || it.tags == null))
+                    && (TextUtils.isEmpty(query)
+                    || it.title?.toLowerCase()?.contains(query!!.toLowerCase()) ?: false
+                    || it.body?.toLowerCase()?.contains(query!!?.toLowerCase()) ?: false)
         }?.toList()
     }
 

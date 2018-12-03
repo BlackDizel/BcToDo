@@ -2,6 +2,7 @@ package org.byters.bctodo.view.presenter
 
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
+import org.byters.bctodo.controller.data.util.IHelperNotesSelected
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterListNotesListener
 import java.lang.ref.WeakReference
@@ -15,6 +16,9 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
 
     @Inject
     lateinit var cacheInterfaceState: ICacheInterfaceState
+
+    @Inject
+    lateinit var helperNotesList:IHelperNotesSelected
 
     private var refListener: WeakReference<IPresenterListNotesListener>? = null
 
@@ -45,5 +49,13 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
     override fun onClickTags() {
         cacheInterfaceState.setTagsVisibility(!cacheInterfaceState.isTagsVisible())
         refListener?.get()?.setVisibilityTags(cacheInterfaceState.isTagsVisible())
+    }
+
+    override fun onQueryEmpty() {
+        helperNotesList.setQuery(null)
+    }
+
+    override fun onQuery(query: String?) {
+        helperNotesList.setQuery(query)
     }
 }

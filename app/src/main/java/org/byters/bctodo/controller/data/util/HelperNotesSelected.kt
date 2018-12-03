@@ -19,6 +19,8 @@ class HelperNotesSelected(app: ApplicationToDo) :
     @Inject
     lateinit var cacheTags: ICacheTags
 
+    private var query: String? = null
+
     private val listenerCacheTags: ICacheTagListener
 
     private var listenerCacheNotes: ICacheNotesListener
@@ -39,7 +41,7 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     private fun getItems(): List<ModelNote> {
         if (data == null)
-            data = cacheNotes.getItems(cacheTags.getSelectedIds(), cacheTags.isSelectedWithoutTag())
+            data = cacheNotes.getItems(cacheTags.getSelectedIds(), cacheTags.isSelectedWithoutTag(), query)
         if (data == null)
             data = ArrayList()
         return data!!
@@ -57,6 +59,12 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     override fun setListener(listenerHelperNotes: IHelperNotesSelectedListener) {
         refListener = WeakReference(listenerHelperNotes)
+    }
+
+    override fun setQuery(query: String?) {
+        this.query = query
+        data = null
+        refListener?.get()?.onDataUpdated()
     }
 
     inner class ListenerCacheTags : ICacheTagListener {

@@ -9,5 +9,7 @@ interface IPresenterListNotes {
     fun onClickFont()
     fun onClickTags()
     fun setListener(listenerPresenter: IPresenterListNotesListener)
+    fun onQueryEmpty()
+    fun onQuery(query: String?)
 
 }

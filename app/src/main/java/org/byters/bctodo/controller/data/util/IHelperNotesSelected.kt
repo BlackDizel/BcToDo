@@ -10,5 +10,6 @@ interface IHelperNotesSelected {
     fun getItemBody(position: Int): String?
     fun getItemDate(position: Int): Long?
     fun setListener(listenerHelperNotes: IHelperNotesSelectedListener)
+    fun setQuery(query: String?)
 
 }

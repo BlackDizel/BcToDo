@@ -88,6 +88,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
     inner class ListenerSearch : IViewSearchListener {
         override fun onHide() {
             vNotesFilter!!.visibility = View.VISIBLE
+            presenterListNotes.onQueryEmpty()
         }
 
         override fun onShow() {
@@ -95,7 +96,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
         }
 
         override fun onQuery(query: String?) {
-            //todo request search
+            presenterListNotes.onQuery(query)
         }
 
     }
