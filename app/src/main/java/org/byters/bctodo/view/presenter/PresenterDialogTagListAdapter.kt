@@ -3,6 +3,7 @@ package org.byters.bctodo.view.presenter
 import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
+import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.controller.data.memorycache.ICacheTags
 import org.byters.bctodo.view.utils.IHelperPopup
 import java.lang.ref.WeakReference
@@ -12,6 +13,9 @@ class PresenterDialogTagListAdapter(app: ApplicationToDo) : IPresenterDialogTagL
 
     @Inject
     lateinit var cacheTags: ICacheTags
+
+    @Inject
+    lateinit var cacheNotes: ICacheNotes
 
     @Inject
     lateinit var helperPopup: IHelperPopup
@@ -45,6 +49,7 @@ class PresenterDialogTagListAdapter(app: ApplicationToDo) : IPresenterDialogTagL
         val id: String? = cacheTags.getId(adapterPosition - 1)
         if (TextUtils.isEmpty(id)) return
         cacheTags.removeTag(id!!)
+        cacheNotes.removeTags(id!!)
         notifyListener()
     }
 

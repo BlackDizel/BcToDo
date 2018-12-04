@@ -39,7 +39,7 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     }
 
 
-    override fun add(title: String?, body: String?, selectedIds: List<String>?) {
+    override fun add(title: String?, body: String?, selectedIds: ArrayList<String>?) {
         if (title == null && body == null) return
 
         if (checkData().notes == null)
@@ -120,5 +120,13 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
     override fun getItemBody(position: Int): String? = checkData().notes?.opt(position)?.body
     override fun getItemDate(position: Int): Long? = checkData().notes?.opt(position)?.date
+
+    override fun removeTags(id: String) {
+        checkData().notes?.forEach {
+            it.tags?.removeAll { it.equals(id) }
+        }
+        saveData()
+        notifyListeners()
+    }
 
 }
