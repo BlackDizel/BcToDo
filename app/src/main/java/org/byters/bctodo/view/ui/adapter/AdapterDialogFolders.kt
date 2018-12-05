@@ -1,5 +1,6 @@
 package org.byters.bctodo.view.ui.adapter
 
+import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -39,7 +40,7 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
         ViewHolderFolder(parent)
 
     inner class ViewHolderFolder(parent: ViewGroup) : ViewHolderBase(R.layout.view_dialog_folers_item, parent),
-        View.OnClickListener {
+        View.OnClickListener, TextView.OnEditorActionListener {
 
         private var tvFolder: TextView
         private var tvFolderAdd: TextView
@@ -62,6 +63,8 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
             itemView.findViewById<View>(R.id.ivFolderAdd).setOnClickListener(this)
             itemView.findViewById<View>(R.id.ivFolderAddComplete).setOnClickListener(this)
             itemView.findViewById<View>(R.id.ivFolderAddCancel).setOnClickListener(this)
+
+            tvFolderAdd.setOnEditorActionListener(this)
 
             adapter = AdapterDialogFolders(itemView.context.applicationContext as ApplicationToDo)
             rvItems.layoutManager = LinearLayoutManager(itemView.context)
@@ -104,15 +107,23 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
             if (v.id == R.id.ivFolderAddCancel)
                 presenterDialogFoldersAdapter.onClickFolderAddCancel()
 
-            if (v.id == R.id.ivFolderAddComplete) {
-                presenterDialogFoldersAdapter.onClickFolderAddComplete(
-                    tvFolderAdd.text.toString(),
-                    folderId,
-                    adapterPosition
-                )
-                tvFolderAdd.text = ""
-            }
+            if (v.id == R.id.ivFolderAddComplete)
+                addFolder()
 
+        }
+
+        private fun addFolder() {
+            presenterDialogFoldersAdapter.onClickFolderAddComplete(
+                tvFolderAdd.text.toString(),
+                folderId,
+                adapterPosition
+            )
+            tvFolderAdd.text = ""
+        }
+
+        override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+            addFolder()
+            return true
         }
     }
 
