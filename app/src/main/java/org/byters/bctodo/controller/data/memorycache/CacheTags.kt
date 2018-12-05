@@ -39,8 +39,7 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
     }
 
     override fun removeTag(id: String) {
-        val tag: ModelTag? = checkData().tags?.filter { it.id.equals(id) }?.first()
-        if (tag == null) return
+        val tag: ModelTag = checkData().tags?.firstOrNull { it.id.equals(id) } ?: return
         if (!checkData().tags!!.remove(tag)) return
         saveData()
         notifyListeners()

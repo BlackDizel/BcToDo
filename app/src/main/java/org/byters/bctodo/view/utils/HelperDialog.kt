@@ -2,12 +2,14 @@ package org.byters.bctodo.view.utils
 
 import android.content.Context
 import org.byters.bctodo.ApplicationToDo
+import org.byters.bctodo.view.ui.dialog.DialogBase
+import org.byters.bctodo.view.ui.dialog.DialogFolders
 import org.byters.bctodo.view.ui.dialog.DialogTagList
 import java.lang.ref.WeakReference
 
 class HelperDialog(app: ApplicationToDo) : IHelperDialog {
 
-    private var refDialogTagList: WeakReference<DialogTagList>? = null
+    private var refDialog: WeakReference<DialogBase>? = null
 
     private var refContext: WeakReference<Context>? = null
 
@@ -15,13 +17,22 @@ class HelperDialog(app: ApplicationToDo) : IHelperDialog {
         refContext = WeakReference(context)
     }
 
+    private fun showDialog(dialog: DialogBase) {
+        refDialog?.get()?.cancel()
+        refDialog = WeakReference(dialog)
+        refDialog?.get()?.show()
+
+    }
+
     override fun showDialogTagList() {
         val context = refContext?.get() ?: return
+        showDialog(DialogTagList(context))
+    }
 
-        refDialogTagList?.get()?.cancel()
-        val dialogTagList = DialogTagList(context)
-        dialogTagList.show()
-        refDialogTagList = WeakReference(dialogTagList)
+
+    override fun showDialogFolders() {
+        val context = refContext?.get() ?: return
+        showDialog(DialogFolders(context))
     }
 
 

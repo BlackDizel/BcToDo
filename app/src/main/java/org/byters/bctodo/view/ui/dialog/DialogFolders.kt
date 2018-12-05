@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
-import org.byters.bctodo.view.ui.adapter.AdapterDialogListTags
+import org.byters.bctodo.view.ui.adapter.AdapterDialogFolders
 
-class DialogTagList(context: Context) : DialogBase, View.OnClickListener {
+class DialogFolders(context: Context) : DialogBase, View.OnClickListener {
 
     private val dialog: Dialog
 
     init {
         dialog = Dialog(context, R.style.themeDialogFullscreen)
-        dialog.setContentView(R.layout.dialog_tag_list)
+        dialog.setContentView(R.layout.dialog_folders)
         initViews(dialog)
         dialog.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
@@ -27,7 +27,7 @@ class DialogTagList(context: Context) : DialogBase, View.OnClickListener {
         dialog.findViewById<RecyclerView>(R.id.rvItems).apply {
             layoutManager = LinearLayoutManager(dialog.context)
             setHasFixedSize(true)
-            adapter = AdapterDialogListTags(dialog.context.applicationContext as ApplicationToDo)
+            adapter = AdapterDialogFolders(dialog.context.applicationContext as ApplicationToDo)
         }
     }
 

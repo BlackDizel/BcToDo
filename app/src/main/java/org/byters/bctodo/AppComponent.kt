@@ -3,16 +3,14 @@ package org.byters.bctodo
 import dagger.Component
 import org.byters.bctodo.controller.AppModule
 import org.byters.bctodo.controller.data.device.CacheStorage
+import org.byters.bctodo.controller.data.memorycache.CacheFolders
 import org.byters.bctodo.controller.data.memorycache.CacheNotes
 import org.byters.bctodo.controller.data.memorycache.CacheTags
 import org.byters.bctodo.controller.data.util.HelperNotesSelected
 import org.byters.bctodo.view.Navigator
 import org.byters.bctodo.view.presenter.*
 import org.byters.bctodo.view.ui.activity.ActivityMain
-import org.byters.bctodo.view.ui.adapter.AdapterDialogListTags
-import org.byters.bctodo.view.ui.adapter.AdapterListNotes
-import org.byters.bctodo.view.ui.adapter.AdapterTags
-import org.byters.bctodo.view.ui.adapter.AdapterTagsNoteCreate
+import org.byters.bctodo.view.ui.adapter.*
 import org.byters.bctodo.view.ui.fragment.FragmentListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
 import org.byters.bctodo.view.ui.fragment.FragmentNoteEdit
@@ -49,5 +47,8 @@ interface AppComponent {
     fun inject(helperDialog: HelperDialog)
     fun inject(adapterDialogListTags: AdapterDialogListTags)
     fun inject(presenterDialogTagListAdapter: PresenterDialogTagListAdapter)
+    fun inject(adapterDialogFolders: AdapterDialogFolders)
+    fun inject(presenterDialogFodlersAdapter: PresenterDialogFodlersAdapter)
+    fun inject(cacheFolders: CacheFolders)
 
 }

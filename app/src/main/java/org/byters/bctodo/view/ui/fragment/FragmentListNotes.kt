@@ -51,6 +51,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
         view.findViewById<View>(R.id.ivTheme).setOnClickListener(this)
         view.findViewById<View>(R.id.ivFont).setOnClickListener(this)
         view.findViewById<View>(R.id.ivTags).setOnClickListener(this)
+        view.findViewById<View>(R.id.ivFolders).setOnClickListener(this)
 
         view.findViewById<ViewSearch>(R.id.vSearch).setListener(ListenerSearch())
 
@@ -75,6 +76,8 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
             presenterListNotes.onClickFont()
         if (v.id == R.id.ivTags)
             presenterListNotes.onClickTags()
+        if (v.id == R.id.ivFolders)
+            presenterListNotes.onClickFolders()
     }
 
     inner class ListenerPresenter : IPresenterListNotesListener {

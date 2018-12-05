@@ -69,6 +69,10 @@ class Navigator(app: ApplicationToDo) : INavigator {
         helperDialog.showDialogTagList()
     }
 
+    override fun navigateFolders() {
+        helperDialog.showDialogFolders()
+    }
+
     override fun navigteErrorPermission() {
         if (refFramgentManager.get() == null) return
 

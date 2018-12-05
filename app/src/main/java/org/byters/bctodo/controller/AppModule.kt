@@ -59,8 +59,12 @@ class AppModule(val app: ApplicationToDo) {
 
     @Provides
     @Singleton
-    fun getPresenterDialogTagsAdapter(): IPresenterDialogTagListAdapter=
-        org.byters.bctodo.view.presenter.PresenterDialogTagListAdapter(app)
+    fun getPresenterDialogTagsAdapter(): IPresenterDialogTagListAdapter = PresenterDialogTagListAdapter(app)
+
+    @Provides
+    @Singleton
+    fun getPresenterDialogFodlersAdapter(): IPresenterDialogFoldersAdapter =
+        org.byters.bctodo.view.presenter.PresenterDialogFodlersAdapter(app)
 
     //endregion
 
@@ -86,6 +90,9 @@ class AppModule(val app: ApplicationToDo) {
     @Singleton
     fun getCacheNoteCreate(): ICacheNoteCreate = CacheNoteCreate(app)
 
+    @Provides
+    @Singleton
+    fun getCacheFolders(): ICacheFolders = CacheFolders(app)
     //endregion
 
 

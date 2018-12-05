@@ -6,4 +6,5 @@ interface IHelperDialog {
     fun showDialogTagList()
 
     fun set(context: Context)
+    fun showDialogFolders()
 }

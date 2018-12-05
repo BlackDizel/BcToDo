@@ -10,7 +10,6 @@ import javax.inject.Inject
 
 class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
 
-
     @Inject
     lateinit var navigator: INavigator
 
@@ -18,7 +17,7 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
     lateinit var cacheInterfaceState: ICacheInterfaceState
 
     @Inject
-    lateinit var helperNotesList:IHelperNotesSelected
+    lateinit var helperNotesList: IHelperNotesSelected
 
     private var refListener: WeakReference<IPresenterListNotesListener>? = null
 
@@ -50,6 +49,11 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
         cacheInterfaceState.setTagsVisibility(!cacheInterfaceState.isTagsVisible())
         refListener?.get()?.setVisibilityTags(cacheInterfaceState.isTagsVisible())
     }
+
+    override fun onClickFolders() {
+        navigator.navigateFolders()
+    }
+
 
     override fun onQueryEmpty() {
         helperNotesList.setQuery(null)

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <FrameLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+        <ImageView
+                android:id="@+id/ivFolderShow"
+                android:tint="?tintDrawable"
+                android:padding="12dp"
+                android:src="@drawable/ic_keyboard_arrow_down_white_24dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
+
+        <ImageView
+                android:layout_gravity="end"
+                android:id="@+id/ivFolderAdd"
+                android:tint="?tintDrawable"
+                android:padding="12dp"
+                android:src="@drawable/ic_add_white_24dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
+
+        <TextView
+                android:id="@+id/tvFolder"
+                android:layout_marginStart="48dp"
+                android:paddingStart="16dp"
+                tools:text="foldername"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+            android:paddingStart="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <FrameLayout
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:id="@+id/llFolderAdd"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+
+            <EditText
+                    android:lines="1"
+                    android:id="@+id/etFolderAdd"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            <ImageView
+                    android:layout_gravity="end"
+                    android:id="@+id/ivFolderAddComplete"
+                    android:tint="?tintDrawable"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_check_white_24dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+
+            <ImageView
+                    android:id="@+id/ivFolderAddCancel"
+                    android:tint="?tintDrawable"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_close_white_24dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:listitem="@layout/view_note_list_item_single_line"
+                android:id="@+id/rvItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

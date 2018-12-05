@@ -11,5 +11,6 @@ interface IPresenterListNotes {
     fun setListener(listenerPresenter: IPresenterListNotesListener)
     fun onQueryEmpty()
     fun onQuery(query: String?)
+    fun onClickFolders()
 
 }
