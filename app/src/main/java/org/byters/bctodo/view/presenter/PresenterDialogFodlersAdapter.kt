@@ -2,7 +2,9 @@ package org.byters.bctodo.view.presenter
 
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.memorycache.ICacheFolders
+import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterDialogFoldersAdapterListener
+import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
 import java.util.*
 import javax.inject.Inject
 
@@ -10,6 +12,9 @@ class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFold
 
     @Inject
     lateinit var cacheFolders: ICacheFolders
+
+    @Inject
+    lateinit var navigator: INavigator
 
     private var folderAddId: String? = null
 
@@ -48,18 +53,19 @@ class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFold
         listeners?.values?.forEach { it.updateData() }
     }
 
-    override fun onClickFolderAdd(folderId: String?, position: Int) {
-        folderAddId = getFolderId(folderId, position)
+    private fun folderAdd(folderId: String?) {
+        folderAddId = folderId
         listeners?.values?.forEach { it.updateData() }
     }
 
-    override fun onClickDelete(folderId: String?, adapterPosition: Int) {
-        cacheFolders.deleteFolder(getFolderId(folderId, adapterPosition))
+    private fun folderDelete(folderId: String?) {
+        cacheFolders.deleteFolder(folderId)
         listeners?.values?.forEach { it.updateData() }
     }
 
-    override fun onClickEdit(folderId: String?, adapterPosition: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onClickMore(folderId: String?, adapterPosition: Int) {
+        cacheFolders.setSelectedId(getFolderId(folderId, adapterPosition))
+        navigator.navigateFolderOptions(ListenerFolderEdit())
     }
 
     override fun onClickFolderAddCancel() {
@@ -75,6 +81,22 @@ class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFold
         folderAddId = null
         cacheFolders.addFolder(getFolderId(folderId, adapterPosition), title)
         listeners?.values?.forEach { it.updateData() }
+    }
+
+    inner class ListenerFolderEdit : IDialogFolderMoreListener {
+        override fun onDelete() {
+            folderDelete(cacheFolders.getSelectedId())
+        }
+
+        override fun onEdit(name: String) {
+            cacheFolders.updateFolder(cacheFolders.getSelectedId(), name)
+            listeners?.values?.forEach { it.updateData() }
+        }
+
+        override fun onAdd() {
+            folderAdd(cacheFolders.getSelectedId())
+        }
+
     }
 
 }

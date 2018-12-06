@@ -2,6 +2,7 @@ package org.byters.bctodo.view
 
 import androidx.fragment.app.FragmentManager
 import org.byters.bctodo.ApplicationToDo
+import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
 import org.byters.bctodo.view.ui.fragment.*
 import org.byters.bctodo.view.utils.IHelperDialog
 import java.lang.ref.WeakReference
@@ -84,6 +85,10 @@ class Navigator(app: ApplicationToDo) : INavigator {
     }
 
     override fun navigateCurrent() {
+    }
+
+    override fun navigateFolderOptions(listener: IDialogFolderMoreListener) {
+        helperDialog.showDialogFolderOptions(listener)
     }
 
 }

@@ -9,5 +9,8 @@ interface ICacheFolders {
     fun addFolder(folderId: String?, title: String)
     fun getFolderIdRoot(): String?
     fun deleteFolder(folderId: String?)
+    fun setSelectedId(folderId: String?)
+    fun updateFolder(selectedId: String?, name: String)
+    fun getSelectedId(): String?
 
 }

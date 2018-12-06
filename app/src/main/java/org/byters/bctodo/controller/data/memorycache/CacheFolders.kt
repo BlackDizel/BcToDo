@@ -20,6 +20,8 @@ class CacheFolders(app: ApplicationToDo) : ICacheFolders {
 
     private var openedIds: HashSet<String>? = null
 
+    private var selectedId: String? = null
+
     init {
         app.component.inject(this)
     }
@@ -86,5 +88,17 @@ class CacheFolders(app: ApplicationToDo) : ICacheFolders {
         }
         return data!!
     }
+
+    override fun setSelectedId(folderId: String?) {
+        this.selectedId = folderId
+    }
+
+    override fun updateFolder(folderId: String?, title: String) {
+        checkData().data?.firstOrNull { it.id == folderId }?.title = title
+        saveData()
+    }
+
+    override fun getSelectedId(): String? = selectedId
+
 
 }

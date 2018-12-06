@@ -20,38 +20,16 @@
 
         <ImageView
                 android:layout_gravity="end"
-                android:id="@+id/ivFolderAdd"
+                android:id="@+id/ivFolderMore"
                 android:tint="?tintDrawable"
                 android:padding="12dp"
-                android:src="@drawable/ic_add_white_24dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
-
-        <ImageView
-                android:layout_marginEnd="96dp"
-                android:layout_gravity="end"
-                android:id="@+id/ivFolderDelete"
-                android:tint="?tintDrawable"
-                android:padding="12dp"
-                android:src="@drawable/ic_delete_white_24dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:layout_width="48dp"
-                android:layout_height="48dp"/>
-
-        <ImageView
-                android:layout_marginEnd="48dp"
-                android:layout_gravity="end"
-                android:id="@+id/ivFolderEdit"
-                android:tint="?tintDrawable"
-                android:padding="12dp"
-                android:src="@drawable/ic_edit_white_24dp"
+                android:src="@drawable/ic_more_vert_white_24dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:layout_width="48dp"
                 android:layout_height="48dp"/>
 
         <TextView
-                android:layout_marginEnd="144dp"
+                android:layout_marginEnd="48dp"
                 android:id="@+id/tvFolder"
                 android:layout_marginStart="48dp"
                 tools:text="foldername"

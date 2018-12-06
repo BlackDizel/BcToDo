@@ -1,6 +1,7 @@
 package org.byters.bctodo.view
 
 import androidx.fragment.app.FragmentManager
+import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
 
 interface INavigator {
 
@@ -13,4 +14,5 @@ interface INavigator {
     fun navigateFolders()
     fun navigteErrorPermission()
     fun navigateCurrent()
+    fun navigateFolderOptions(listener: IDialogFolderMoreListener)
 }
