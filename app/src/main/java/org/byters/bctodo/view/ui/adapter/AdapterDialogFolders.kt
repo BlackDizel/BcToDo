@@ -63,6 +63,8 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
             itemView.findViewById<View>(R.id.ivFolderAdd).setOnClickListener(this)
             itemView.findViewById<View>(R.id.ivFolderAddComplete).setOnClickListener(this)
             itemView.findViewById<View>(R.id.ivFolderAddCancel).setOnClickListener(this)
+            itemView.findViewById<View>(R.id.ivFolderDelete).setOnClickListener(this)
+            itemView.findViewById<View>(R.id.ivFolderEdit).setOnClickListener(this)
 
             tvFolderAdd.setOnEditorActionListener(this)
 
@@ -110,6 +112,11 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
             if (v.id == R.id.ivFolderAddComplete)
                 addFolder()
 
+            if (v.id == R.id.ivFolderDelete)
+                presenterDialogFoldersAdapter.onClickDelete(folderId, adapterPosition)
+
+            if (v.id == R.id.ivFolderEdit)
+                presenterDialogFoldersAdapter.onClickEdit(folderId, adapterPosition)
         }
 
         private fun addFolder() {

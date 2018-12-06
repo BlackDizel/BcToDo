@@ -8,5 +8,6 @@ interface ICacheFolders {
     fun getItemTitle(folderId: String?): String
     fun addFolder(folderId: String?, title: String)
     fun getFolderIdRoot(): String?
+    fun deleteFolder(folderId: String?)
 
 }

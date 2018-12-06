@@ -9,6 +9,7 @@ import org.byters.bctodo.model.ModelFolder
 import org.byters.bctodo.model.ModelFolderCollection
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class CacheFolders(app: ApplicationToDo) : ICacheFolders {
 
@@ -45,10 +46,32 @@ class CacheFolders(app: ApplicationToDo) : ICacheFolders {
     override fun getItemTitle(folderId: String?): String =
         checkData().data?.firstOrNull { it.id == folderId }?.title ?: ""
 
-    override fun addFolder(folderId: String?, title: String) {
+    override fun addFolder(parentFolderId: String?, title: String) {
         if (checkData().data == null) checkData().data = ArrayList()
-        checkData().data!!.add(ModelFolder(UUID.randomUUID().toString(), folderId, title))
+        checkData().data!!.add(ModelFolder(UUID.randomUUID().toString(), parentFolderId, title))
         saveData()
+    }
+
+
+    override fun deleteFolder(folderId: String?) {
+        if (checkData().data == null) return
+
+        val ids: ArrayList<String?> = ArrayList()
+        ids.add(folderId)
+
+        recursiveFindChilds(folderId, ids)
+
+        checkData().data?.removeAll { it.id in ids }
+
+        saveData()
+    }
+
+    private fun recursiveFindChilds(parentFolderId: String?, ids: ArrayList<String?>) {
+        checkData().data?.forEach {
+            if (it.parentId == parentFolderId) {
+                ids.add(it.id); recursiveFindChilds(it.id, ids)
+            }
+        }
     }
 
     private fun saveData() {

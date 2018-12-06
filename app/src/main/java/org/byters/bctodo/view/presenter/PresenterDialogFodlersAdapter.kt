@@ -53,6 +53,15 @@ class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFold
         listeners?.values?.forEach { it.updateData() }
     }
 
+    override fun onClickDelete(folderId: String?, adapterPosition: Int) {
+        cacheFolders.deleteFolder(getFolderId(folderId, adapterPosition))
+        listeners?.values?.forEach { it.updateData() }
+    }
+
+    override fun onClickEdit(folderId: String?, adapterPosition: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onClickFolderAddCancel() {
         folderAddId = null
         listeners?.values?.forEach { it.updateData() }
