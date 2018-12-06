@@ -9,7 +9,9 @@ interface IHelperNotesSelected {
     fun getItemTitle(position: Int): String?
     fun getItemBody(position: Int): String?
     fun getItemDate(position: Int): Long?
-    fun setListener(listenerHelperNotes: IHelperNotesSelectedListener)
+    fun addListener(listenerHelperNotes: IHelperNotesSelectedListener)
     fun setQuery(query: String?)
+    fun setFolderId(folderId: String?)
+    fun getFolderId(): String?
 
 }

@@ -2,6 +2,7 @@ package org.byters.bctodo.view.presenter
 
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.memorycache.ICacheFolders
+import org.byters.bctodo.controller.data.util.IHelperNotesSelected
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterDialogFoldersAdapterListener
 import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
@@ -15,6 +16,9 @@ class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFold
 
     @Inject
     lateinit var navigator: INavigator
+
+    @Inject
+    lateinit var helperNotes: IHelperNotesSelected
 
     private var folderAddId: String? = null
 
@@ -98,6 +102,11 @@ class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFold
         }
 
     }
+
+    override fun onClickItem(folderId: String?, adapterPosition: Int) {
+        helperNotes.setFolderId(getFolderId(folderId, adapterPosition))
+    }
+
 
 }
 

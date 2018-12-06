@@ -7,5 +7,6 @@ data class ModelNote(
     var title: String?,
     var body: String?,
     var date: Long?,
-    var tags: ArrayList<String>? = null
+    var tags: ArrayList<String>? = null,
+    var folderId: String? = null
 ) : Serializable

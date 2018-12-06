@@ -12,5 +12,6 @@ interface IPresenterListNotes {
     fun onQueryEmpty()
     fun onQuery(query: String?)
     fun onClickFolders()
+    fun onClickPathCancel()
 
 }

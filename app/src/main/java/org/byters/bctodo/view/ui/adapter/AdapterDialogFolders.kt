@@ -63,6 +63,7 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
             itemView.findViewById<View>(R.id.ivFolderAddComplete).setOnClickListener(this)
             itemView.findViewById<View>(R.id.ivFolderAddCancel).setOnClickListener(this)
             itemView.findViewById<View>(R.id.ivFolderMore).setOnClickListener(this)
+            itemView.setOnClickListener(this)
 
             tvFolderAdd.setOnEditorActionListener(this)
 
@@ -98,6 +99,10 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
 
         override fun onClick(v: View?) {
             if (v == null) return
+
+            if (v == itemView)
+                presenterDialogFoldersAdapter.onClickItem(folderId, adapterPosition)
+
             if (v.id == R.id.ivFolderShow)
                 presenterDialogFoldersAdapter.onClickFolderShow(folderId, adapterPosition)
 

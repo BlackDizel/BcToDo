@@ -7,7 +7,7 @@ import org.byters.bctodo.controller.data.memorycache.ICacheTags
 import org.byters.bctodo.controller.data.memorycache.callback.ICacheTagListener
 import org.byters.bctodo.controller.data.util.callback.IHelperNotesSelectedListener
 import org.byters.bctodo.model.ModelNote
-import java.lang.ref.WeakReference
+import java.util.*
 import javax.inject.Inject
 
 class HelperNotesSelected(app: ApplicationToDo) :
@@ -21,13 +21,15 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     private var query: String? = null
 
+    private var folderId: String? = null
+
     private val listenerCacheTags: ICacheTagListener
 
     private var listenerCacheNotes: ICacheNotesListener
 
     private var data: List<ModelNote>? = null
 
-    private var refListener: WeakReference<IHelperNotesSelectedListener>? = null
+    private var listeners: WeakHashMap<String, IHelperNotesSelectedListener>? = null
 
     init {
         app.component.inject(this)
@@ -41,7 +43,7 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     private fun getItems(): List<ModelNote> {
         if (data == null)
-            data = cacheNotes.getItems(cacheTags.getSelectedIds(), cacheTags.isSelectedWithoutTag(), query)
+            data = cacheNotes.getItems(cacheTags.getSelectedIds(), cacheTags.isSelectedWithoutTag(), query, folderId)
         if (data == null)
             data = ArrayList()
         return data!!
@@ -57,20 +59,32 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     override fun getItemDate(position: Int): Long? = getItems().opt(position)?.date
 
-    override fun setListener(listenerHelperNotes: IHelperNotesSelectedListener) {
-        refListener = WeakReference(listenerHelperNotes)
+    override fun addListener(listenerHelperNotes: IHelperNotesSelectedListener) {
+        if (listeners == null) listeners = WeakHashMap()
+        listeners!!.put(listenerHelperNotes::class.java.name, listenerHelperNotes)
     }
+
+
+    override fun setFolderId(folderId: String?) {
+        this.folderId = folderId
+        data = null
+
+        listeners?.values?.forEach { it.onDataUpdated() }
+    }
+
+    override fun getFolderId(): String? = folderId
+
 
     override fun setQuery(query: String?) {
         this.query = query
         data = null
-        refListener?.get()?.onDataUpdated()
+        listeners?.values?.forEach { it.onDataUpdated() }
     }
 
     inner class ListenerCacheTags : ICacheTagListener {
         override fun onDataUpdate() {
             data = null
-            refListener?.get()?.onDataUpdated()
+            listeners?.values?.forEach { it.onDataUpdated() }
         }
     }
 
@@ -78,7 +92,7 @@ class HelperNotesSelected(app: ApplicationToDo) :
     inner class ListenerCacheNotes : ICacheNotesListener {
         override fun onDataUpdate() {
             data = null
-            refListener?.get()?.onDataUpdated()
+            listeners?.values?.forEach { it.onDataUpdated() }
         }
     }
 }

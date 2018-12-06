@@ -76,14 +76,17 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     override fun getItems(
         selectedIds: Iterable<String>?,
         selectedWithoutTag: Boolean,
-        query: String?
+        query: String?,
+        folderId: String?
     ): List<ModelNote>? {
         return checkData().notes?.filter {
             (selectedIds != null && (it.tags?.intersect(selectedIds)?.any() ?: false)
                     || selectedWithoutTag && (it.tags?.size == 0 || it.tags == null))
                     && (TextUtils.isEmpty(query)
                     || it.title?.toLowerCase()?.contains(query!!.toLowerCase()) ?: false
-                    || it.body?.toLowerCase()?.contains(query!!?.toLowerCase()) ?: false)
+                    || it.body?.toLowerCase()?.contains(query!!.toLowerCase()) ?: false)
+                    && (TextUtils.isEmpty(folderId)
+                    || it.folderId == folderId)
         }?.toList()
     }
 

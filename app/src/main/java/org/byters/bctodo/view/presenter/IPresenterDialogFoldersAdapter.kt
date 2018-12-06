@@ -15,5 +15,6 @@ interface IPresenterDialogFoldersAdapter {
     fun getFolderIdRoot(): String?
     fun isVisibleFolderShow(folderId: String?, position: Int): Boolean
     fun onClickMore(folderId: String?, adapterPosition: Int)
+    fun onClickItem(folderId: String?, adapterPosition: Int)
 
 }

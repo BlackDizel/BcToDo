@@ -37,7 +37,7 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
         listenerCacheInterfaceState = ListenerCacheInterfaceState()
         cacheInterfaceState.addListener(listenerCacheInterfaceState)
         listenerHelperNotes = ListenerHelperNotes()
-        helperNotesSelected.setListener(listenerHelperNotes)
+        helperNotesSelected.addListener(listenerHelperNotes)
     }
 
     inner class ListenerHelperNotes : IHelperNotesSelectedListener {

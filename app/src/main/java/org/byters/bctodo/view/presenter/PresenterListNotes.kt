@@ -1,8 +1,11 @@
 package org.byters.bctodo.view.presenter
 
+import android.text.TextUtils
 import org.byters.bctodo.ApplicationToDo
+import org.byters.bctodo.controller.data.memorycache.ICacheFolders
 import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
 import org.byters.bctodo.controller.data.util.IHelperNotesSelected
+import org.byters.bctodo.controller.data.util.callback.IHelperNotesSelectedListener
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterListNotesListener
 import java.lang.ref.WeakReference
@@ -19,10 +22,17 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
     @Inject
     lateinit var helperNotesList: IHelperNotesSelected
 
+    @Inject
+    lateinit var cacheFolders: ICacheFolders
+
     private var refListener: WeakReference<IPresenterListNotesListener>? = null
+
+    private val listenerNotesSelected: ListenerNotesSelected
 
     init {
         app.component.inject(this)
+        listenerNotesSelected = ListenerNotesSelected()
+        helperNotesList.addListener(listenerNotesSelected)
     }
 
     override fun onClickAdd() {
@@ -62,4 +72,21 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
     override fun onQuery(query: String?) {
         helperNotesList.setQuery(query)
     }
+
+    override fun onClickPathCancel() {
+        helperNotesList.setFolderId(null)
+    }
+
+    inner class ListenerNotesSelected : IHelperNotesSelectedListener {
+        override fun onDataUpdated() {
+
+            refListener?.get()?.setPathVisible(
+                !TextUtils.isEmpty(helperNotesList.getFolderId()),
+                cacheFolders.getItemTitle(helperNotesList.getFolderId())
+            )
+
+        }
+
+    }
+
 }

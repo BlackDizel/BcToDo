@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.view_toolbar_notes.*
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.view.presenter.IPresenterListNotes
@@ -52,6 +53,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
         view.findViewById<View>(R.id.ivFont).setOnClickListener(this)
         view.findViewById<View>(R.id.ivTags).setOnClickListener(this)
         view.findViewById<View>(R.id.ivFolders).setOnClickListener(this)
+        view.findViewById<View>(R.id.vPathCancel).setOnClickListener(this)
 
         view.findViewById<ViewSearch>(R.id.vSearch).setListener(ListenerSearch())
 
@@ -78,9 +80,15 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
             presenterListNotes.onClickTags()
         if (v.id == R.id.ivFolders)
             presenterListNotes.onClickFolders()
+        if (v.id == R.id.vPathCancel)
+            presenterListNotes.onClickPathCancel()
     }
 
     inner class ListenerPresenter : IPresenterListNotesListener {
+        override fun setPathVisible(isVisible: Boolean, itemTitle: String) {
+            llPath.visibility = if (isVisible) View.VISIBLE else View.GONE
+            tvPath.text = itemTitle
+        }
 
         override fun setVisibilityTags(isVisible: Boolean) {
             if (!isAdded) return
