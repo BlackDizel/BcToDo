@@ -3,6 +3,7 @@ package org.byters.bctodo.view.presenter
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.controller.data.memorycache.ICacheNoteCreate
 import org.byters.bctodo.controller.data.memorycache.ICacheTags
+import org.byters.bctodo.controller.data.memorycache.callback.ICacheTagListener
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterNoteCreateTagsAdapterListener
 import java.lang.ref.WeakReference
@@ -18,10 +19,14 @@ class PresenterNoteCreateTagsAdapter(app: ApplicationToDo) :
     lateinit var cacheNoteCreate: ICacheNoteCreate
 
     @Inject
-    lateinit var navigator:INavigator
+    lateinit var navigator: INavigator
+
+    private var listenerCacheTags: ICacheTagListener
 
     init {
         app.component.inject(this)
+        listenerCacheTags = ListenerCacheTags()
+        cacheTags.addListener(listenerCacheTags)
     }
 
     private var refListenerPresenter: WeakReference<IPresenterNoteCreateTagsAdapterListener>? = null
@@ -54,6 +59,13 @@ class PresenterNoteCreateTagsAdapter(app: ApplicationToDo) :
     enum class TypeEnum(val value: Int) {
         SETTINGS(1),
         ITEM(2)
+    }
+
+    inner class ListenerCacheTags : ICacheTagListener {
+        override fun onDataUpdate() {
+            refListenerPresenter?.get()?.updateData()
+        }
+
     }
 
 }
