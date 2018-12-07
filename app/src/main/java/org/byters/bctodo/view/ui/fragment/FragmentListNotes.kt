@@ -86,6 +86,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
 
     inner class ListenerPresenter : IPresenterListNotesListener {
         override fun setPathVisible(isVisible: Boolean, itemTitle: String) {
+            if (!isAdded) return
             llPath.visibility = if (isVisible) View.VISIBLE else View.GONE
             tvPath.text = itemTitle
         }
@@ -98,15 +99,18 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
 
     inner class ListenerSearch : IViewSearchListener {
         override fun onHide() {
+            if (!isAdded) return
             vNotesFilter!!.visibility = View.VISIBLE
             presenterListNotes.onQueryEmpty()
         }
 
         override fun onShow() {
+            if (!isAdded) return
             vNotesFilter!!.visibility = View.GONE
         }
 
         override fun onQuery(query: String?) {
+            if (!isAdded) return
             presenterListNotes.onQuery(query)
         }
 
