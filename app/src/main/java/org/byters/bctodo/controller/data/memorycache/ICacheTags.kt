@@ -14,4 +14,7 @@ interface ICacheTags {
     fun getId(position: Int): String?
     fun addTag(title: String)
     fun removeTag(id: String)
+    fun setSelectedPopup(position: Int)
+    fun getSelectedPopupId(): String?
+    fun updateTitle(selectedPopupId: String?, title: String)
 }

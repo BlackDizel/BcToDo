@@ -16,11 +16,11 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
     <ImageView
-            android:id="@+id/ivDelete"
+            android:id="@+id/ivTagMore"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="12dp"
-            android:src="@drawable/ic_delete_white_24dp"
+            android:src="@drawable/ic_more_vert_white_24dp"
             android:tint="?tintDrawable"
             android:layout_gravity="end"/>
 

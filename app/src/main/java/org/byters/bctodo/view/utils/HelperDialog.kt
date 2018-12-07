@@ -2,11 +2,9 @@ package org.byters.bctodo.view.utils
 
 import android.content.Context
 import org.byters.bctodo.ApplicationToDo
-import org.byters.bctodo.view.ui.dialog.DialogBase
-import org.byters.bctodo.view.ui.dialog.DialogFolderOptions
-import org.byters.bctodo.view.ui.dialog.DialogFolders
-import org.byters.bctodo.view.ui.dialog.DialogTagList
+import org.byters.bctodo.view.ui.dialog.*
 import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
+import org.byters.bctodo.view.ui.dialog.callback.IDialogTagOptionsListener
 import java.lang.ref.WeakReference
 
 class HelperDialog(app: ApplicationToDo) : IHelperDialog {
@@ -16,6 +14,7 @@ class HelperDialog(app: ApplicationToDo) : IHelperDialog {
     private var refContext: WeakReference<Context>? = null
 
     private var refDialogFolderOptions: WeakReference<DialogFolderOptions>? = null
+    private var refDialogTagOptions: WeakReference<DialogTagOptions>? = null
 
     override fun set(context: Context) {
         refContext = WeakReference(context)
@@ -45,6 +44,15 @@ class HelperDialog(app: ApplicationToDo) : IHelperDialog {
         refDialogFolderOptions?.get()?.cancel()
         refDialogFolderOptions = WeakReference(DialogFolderOptions(context, listener))
         refDialogFolderOptions?.get()?.show()
+    }
+
+    override fun showDialogTagOptions(listener: IDialogTagOptionsListener) {
+        val context = refContext?.get() ?: return
+
+        refDialogTagOptions?.get()?.cancel()
+        refDialogTagOptions = WeakReference(DialogTagOptions(context, listener))
+        refDialogTagOptions?.get()?.show()
+
     }
 
 

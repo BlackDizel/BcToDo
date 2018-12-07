@@ -17,6 +17,7 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
     lateinit var cacheStorage: ICacheStorage
 
     var data: ModelTagsCollection? = null
+    var selectedPopupTagId: String? = null
 
     private var listeners: WeakHashMap<String, ICacheTagListener>? = null
 
@@ -83,4 +84,17 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
         if (listeners == null) listeners = WeakHashMap()
         listeners!!.put(listener::class.java.name, listener)
     }
+
+    override fun setSelectedPopup(position: Int) {
+        selectedPopupTagId = getId(position)
+    }
+
+    override fun getSelectedPopupId(): String? = selectedPopupTagId
+
+    override fun updateTitle(selectedPopupId: String?, title: String) {
+        checkData().tags?.firstOrNull { it.id == selectedPopupId }?.title = title
+        saveData()
+        notifyListeners()
+    }
+
 }

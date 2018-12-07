@@ -70,7 +70,7 @@ class AdapterDialogListTags(applicationToDo: ApplicationToDo) : AdapterBase() {
 
         init {
             tvTitle = itemView.findViewById(R.id.tvTitle)
-            itemView.findViewById<View>(R.id.ivDelete).setOnClickListener(this)
+            itemView.findViewById<View>(R.id.ivTagMore).setOnClickListener(this)
         }
 
         override fun setData(position: Int) {
@@ -79,7 +79,7 @@ class AdapterDialogListTags(applicationToDo: ApplicationToDo) : AdapterBase() {
         }
 
         override fun onClick(v: View?) {
-            presenterDialogTagListAdapter.onClickDelete(adapterPosition)
+            presenterDialogTagListAdapter.onClickMore(adapterPosition)
         }
 
     }
