@@ -11,6 +11,7 @@ import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.view.presenter.IPresenterDialogFoldersAdapter
 import org.byters.bctodo.view.ui.adapter.AdapterDialogFolders
+import org.byters.bctodo.view.ui.adapter.callback.IDialogFolderAdapterListener
 import javax.inject.Inject
 
 class DialogFolders(context: Context) : DialogBase, View.OnClickListener {
@@ -20,9 +21,13 @@ class DialogFolders(context: Context) : DialogBase, View.OnClickListener {
 
     private val dialog: Dialog
 
+    private var listenerDialogAdapter: IDialogFolderAdapterListener
+
     init {
         (context.applicationContext as ApplicationToDo).component.inject(this)
         presenterAdapterDialogFolders.onCreate()
+
+        listenerDialogAdapter = ListenerDialogAdapter()
 
         dialog = Dialog(context, R.style.themeDialogFullscreen)
         dialog.setContentView(R.layout.dialog_folders)
@@ -35,7 +40,7 @@ class DialogFolders(context: Context) : DialogBase, View.OnClickListener {
         dialog.findViewById<RecyclerView>(R.id.rvItems).apply {
             layoutManager = LinearLayoutManager(dialog.context)
             setHasFixedSize(true)
-            adapter = AdapterDialogFolders(dialog.context.applicationContext as ApplicationToDo)
+            adapter = AdapterDialogFolders(dialog.context.applicationContext as ApplicationToDo, listenerDialogAdapter)
         }
     }
 
@@ -49,6 +54,12 @@ class DialogFolders(context: Context) : DialogBase, View.OnClickListener {
 
     override fun onClick(v: View?) {
         cancel()
+    }
+
+    inner class ListenerDialogAdapter : IDialogFolderAdapterListener {
+        override fun onClickItem() {
+            cancel()
+        }
     }
 
 }

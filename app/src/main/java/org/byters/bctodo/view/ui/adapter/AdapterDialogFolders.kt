@@ -11,10 +11,12 @@ import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.view.presenter.IPresenterDialogFoldersAdapter
 import org.byters.bctodo.view.presenter.callback.IPresenterDialogFoldersAdapterListener
+import org.byters.bctodo.view.ui.adapter.callback.IDialogFolderAdapterListener
+import java.lang.ref.WeakReference
 import java.util.*
 import javax.inject.Inject
 
-class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
+class AdapterDialogFolders(app: ApplicationToDo, listenerDialogAdapter:IDialogFolderAdapterListener?) : AdapterBase() {
 
     @Inject
     lateinit var presenterDialogFoldersAdapter: IPresenterDialogFoldersAdapter
@@ -23,9 +25,12 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
 
     private var folderId: String? = null
 
+    private var refListenerDialog: WeakReference<IDialogFolderAdapterListener?>
+
     init {
         app.component.inject(this)
         listenerPresenter = ListenerPresenter()
+        refListenerDialog = WeakReference(listenerDialogAdapter)
         presenterDialogFoldersAdapter.addListener(listenerPresenter)
     }
 
@@ -67,7 +72,7 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
 
             tvFolderAdd.setOnEditorActionListener(this)
 
-            adapter = AdapterDialogFolders(itemView.context.applicationContext as ApplicationToDo)
+            adapter = AdapterDialogFolders(itemView.context.applicationContext as ApplicationToDo, refListenerDialog?.get())
             rvItems.layoutManager = LinearLayoutManager(itemView.context)
             rvItems.adapter = adapter
             //todo set shared view pool
@@ -100,8 +105,10 @@ class AdapterDialogFolders(app: ApplicationToDo) : AdapterBase() {
         override fun onClick(v: View?) {
             if (v == null) return
 
-            if (v == itemView)
+            if (v == itemView) {
                 presenterDialogFoldersAdapter.onClickItem(folderId, adapterPosition)
+                refListenerDialog?.get()?.onClickItem()
+            }
 
             if (v.id == R.id.ivFolderShow)
                 presenterDialogFoldersAdapter.onClickFolderShow(folderId, adapterPosition)
