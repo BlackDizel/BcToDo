@@ -9,13 +9,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
+import org.byters.bctodo.view.presenter.IPresenterDialogFoldersAdapter
 import org.byters.bctodo.view.ui.adapter.AdapterDialogFolders
+import javax.inject.Inject
 
 class DialogFolders(context: Context) : DialogBase, View.OnClickListener {
+
+    @Inject
+    lateinit var presenterAdapterDialogFolders: IPresenterDialogFoldersAdapter
 
     private val dialog: Dialog
 
     init {
+        (context.applicationContext as ApplicationToDo).component.inject(this)
+        presenterAdapterDialogFolders.onCreate()
+
         dialog = Dialog(context, R.style.themeDialogFullscreen)
         dialog.setContentView(R.layout.dialog_folders)
         initViews(dialog)

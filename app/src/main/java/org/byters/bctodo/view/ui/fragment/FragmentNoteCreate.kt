@@ -23,6 +23,10 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
 
     lateinit var listenerPresenter: IPresenterNoteCreateListener
 
+    private lateinit var etTitle: EditText
+    private lateinit var etBody: EditText
+    private lateinit var tvFolder: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (context?.applicationContext as ApplicationToDo).component.inject(this)
@@ -37,13 +41,12 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
         return view
     }
 
-    private lateinit var etTitle: EditText
-    private lateinit var etBody: EditText
-
     private fun initViews(view: View) {
         etTitle = view.findViewById(R.id.etTitle)
         etBody = view.findViewById(R.id.etBody)
+        tvFolder = view.findViewById(R.id.tvFolder)
         view.findViewById<View>(R.id.tvSave).setOnClickListener(this)
+        view.findViewById<View>(R.id.ivFolderEdit).setOnClickListener(this)
 
         view.findViewById<RecyclerView>(R.id.rvTags).apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -53,7 +56,11 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        presenterNoteCreate.onClickSave(etTitle.text.toString(), etBody.text.toString())
+        if (v == null) return
+        if (v.id == R.id.tvSave)
+            presenterNoteCreate.onClickSave(etTitle.text.toString(), etBody.text.toString())
+        if (v.id == R.id.ivFolderEdit)
+            presenterNoteCreate.onClickFolder()
     }
 
     inner class PresenterListener : IPresenterNoteCreateListener {

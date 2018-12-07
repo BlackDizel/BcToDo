@@ -63,8 +63,7 @@ class AppModule(val app: ApplicationToDo) {
 
     @Provides
     @Singleton
-    fun getPresenterDialogFodlersAdapter(): IPresenterDialogFoldersAdapter =
-        org.byters.bctodo.view.presenter.PresenterDialogFodlersAdapter(app)
+    fun getPresenterDialogFodlersAdapter(): IPresenterDialogFoldersAdapter = PresenterDialogFoldersAdapter(app)
 
     //endregion
 

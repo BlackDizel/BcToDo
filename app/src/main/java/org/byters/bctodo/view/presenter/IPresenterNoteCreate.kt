@@ -6,5 +6,6 @@ interface IPresenterNoteCreate {
     fun setListener(listener: IPresenterNoteCreateListener)
     fun onClickSave(title: String, body: String)
     fun onCreateView()
+    fun onClickFolder()
 
 }

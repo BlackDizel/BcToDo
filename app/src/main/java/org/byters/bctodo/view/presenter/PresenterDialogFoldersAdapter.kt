@@ -9,7 +9,7 @@ import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
 import java.util.*
 import javax.inject.Inject
 
-class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFoldersAdapter {
+class PresenterDialogFoldersAdapter(app: ApplicationToDo) : IPresenterDialogFoldersAdapter {
 
     @Inject
     lateinit var cacheFolders: ICacheFolders
@@ -26,6 +26,10 @@ class PresenterDialogFodlersAdapter(app: ApplicationToDo) : IPresenterDialogFold
 
     init {
         app.component.inject(this)
+    }
+
+    override fun onCreate() {
+        listeners = null
     }
 
     override fun getItemsNum(folderId: String?): Int = cacheFolders.getItemsNum(folderId)

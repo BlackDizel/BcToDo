@@ -8,6 +8,7 @@ import org.byters.bctodo.controller.data.memorycache.ICacheInterfaceState
 import org.byters.bctodo.controller.data.memorycache.ICacheNoteCreate
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.model.FontEnum
+import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterNoteCreateListener
 import org.byters.bctodo.view.utils.IHelperPopup
 import java.lang.ref.WeakReference
@@ -27,6 +28,9 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
     @Inject
     lateinit var cacheNoteCreate: ICacheNoteCreate
 
+    @Inject
+    lateinit var navigator: INavigator
+
     var refListener: WeakReference<IPresenterNoteCreateListener>? = null
 
     init {
@@ -42,6 +46,9 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
         refListener?.get()?.finish()
     }
 
+    override fun onClickFolder() {
+        navigator.navigateFolders()
+    }
 
     override fun setListener(listener: IPresenterNoteCreateListener) {
         refListener = WeakReference(listener)

@@ -11,6 +11,7 @@ import org.byters.bctodo.view.Navigator
 import org.byters.bctodo.view.presenter.*
 import org.byters.bctodo.view.ui.activity.ActivityMain
 import org.byters.bctodo.view.ui.adapter.*
+import org.byters.bctodo.view.ui.dialog.DialogFolders
 import org.byters.bctodo.view.ui.fragment.FragmentListNotes
 import org.byters.bctodo.view.ui.fragment.FragmentNoteCreate
 import org.byters.bctodo.view.ui.fragment.FragmentNoteEdit
@@ -48,7 +49,8 @@ interface AppComponent {
     fun inject(adapterDialogListTags: AdapterDialogListTags)
     fun inject(presenterDialogTagListAdapter: PresenterDialogTagListAdapter)
     fun inject(adapterDialogFolders: AdapterDialogFolders)
-    fun inject(presenterDialogFodlersAdapter: PresenterDialogFodlersAdapter)
+    fun inject(presenterDialogFodlersAdapter: PresenterDialogFoldersAdapter)
     fun inject(cacheFolders: CacheFolders)
+    fun inject(dialogFolders: DialogFolders)
 
 }
