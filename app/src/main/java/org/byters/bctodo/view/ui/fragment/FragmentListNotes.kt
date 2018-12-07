@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_toolbar_notes.*
@@ -24,6 +25,8 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
 
     private var rvTags: RecyclerView? = null
     private var vNotesFilter: View? = null
+    private var llPath: View? = null
+    private var tvPath: TextView? = null
 
     private lateinit var listenerPresenter: IPresenterListNotesListener
 
@@ -38,6 +41,7 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_list_notes, container, false)
         initViews(view)
+        presenterListNotes.onCreateView()
         return view
     }
 
@@ -58,8 +62,10 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
         view.findViewById<ViewSearch>(R.id.vSearch).setListener(ListenerSearch())
 
         vNotesFilter = view.findViewById(R.id.llNotesFilter)
-
+        llPath = view.findViewById(R.id.llPath)
+        tvPath = view.findViewById(R.id.tvPath)
         rvTags = view.findViewById(R.id.rvTags)
+
         rvTags!!.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
@@ -87,8 +93,8 @@ class FragmentListNotes : FragmentBase(), View.OnClickListener {
     inner class ListenerPresenter : IPresenterListNotesListener {
         override fun setPathVisible(isVisible: Boolean, itemTitle: String) {
             if (!isAdded) return
-            llPath.visibility = if (isVisible) View.VISIBLE else View.GONE
-            tvPath.text = itemTitle
+            llPath?.visibility = if (isVisible) View.VISIBLE else View.GONE
+            tvPath?.text = itemTitle
         }
 
         override fun setVisibilityTags(isVisible: Boolean) {

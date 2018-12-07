@@ -57,6 +57,10 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
 
     override fun onClickTags() {
         cacheInterfaceState.setTagsVisibility(!cacheInterfaceState.isTagsVisible())
+        setStateTags()
+    }
+
+    private fun setStateTags() {
         refListener?.get()?.setVisibilityTags(cacheInterfaceState.isTagsVisible())
     }
 
@@ -79,14 +83,21 @@ class PresenterListNotes(app: ApplicationToDo) : IPresenterListNotes {
 
     inner class ListenerNotesSelected : IHelperNotesSelectedListener {
         override fun onDataUpdated() {
-
-            refListener?.get()?.setPathVisible(
-                !TextUtils.isEmpty(helperNotesList.getFolderId()),
-                cacheFolders.getItemTitle(helperNotesList.getFolderId())
-            )
-
+            setStateFolder()
         }
 
+    }
+
+    private fun setStateFolder() {
+        refListener?.get()?.setPathVisible(
+            !TextUtils.isEmpty(helperNotesList.getFolderId()),
+            cacheFolders.getItemTitle(helperNotesList.getFolderId())
+        )
+    }
+
+    override fun onCreateView() {
+        setStateFolder()
+        setStateTags()
     }
 
 }

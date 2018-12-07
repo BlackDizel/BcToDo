@@ -5,5 +5,5 @@ import android.graphics.Typeface
 interface IPresenterNoteCreateListener {
 
     fun finish()
-    fun setData(font: Typeface)
+    fun setData(font: Typeface, itemTitle: String?)
 }

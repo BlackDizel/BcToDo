@@ -13,5 +13,6 @@ interface IPresenterListNotes {
     fun onQuery(query: String?)
     fun onClickFolders()
     fun onClickPathCancel()
+    fun onCreateView()
 
 }

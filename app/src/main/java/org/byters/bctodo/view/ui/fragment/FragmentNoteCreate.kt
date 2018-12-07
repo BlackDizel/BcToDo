@@ -2,6 +2,7 @@ package org.byters.bctodo.view.ui.fragment
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,13 +65,14 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
     }
 
     inner class PresenterListener : IPresenterNoteCreateListener {
+        override fun setData(font: Typeface, itemTitle: String?) {
+            setFont(etTitle, etBody, font = font)
+            tvFolder.text = if (TextUtils.isEmpty(itemTitle)) "" else itemTitle
+        }
+
         override fun finish() {
             if (!isAdded) return
             activity?.onBackPressed()
-        }
-
-        override fun setData(font: Typeface) {
-            setFont(etTitle, etBody, font = font)
         }
 
         fun setFont(vararg items: TextView, font: Typeface) {
