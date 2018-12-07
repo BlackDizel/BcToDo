@@ -55,7 +55,7 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
             helperPopup.showToast(R.string.note_empty);
             return
         }
-        cacheNotes.add(title, body, cacheNoteCreate.getSelectedIds())
+        cacheNotes.add(title, body, cacheNoteCreate.getSelectedIds(), helperNotesSelected.getFolderId())
         refListener?.get()?.finish()
     }
 

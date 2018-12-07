@@ -10,6 +10,7 @@ import org.byters.bctodo.model.ModelNote
 import org.byters.bctodo.model.ModelNoteCollection
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class CacheNotes(app: ApplicationToDo) : ICacheNotes {
 
@@ -39,7 +40,12 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
     }
 
 
-    override fun add(title: String?, body: String?, selectedIds: ArrayList<String>?) {
+    override fun add(
+        title: String?,
+        body: String?,
+        selectedIds: ArrayList<String>?,
+        folderId: String?
+    ) {
         if (title == null && body == null) return
 
         if (checkData().notes == null)
@@ -50,7 +56,8 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
                 title,
                 body,
                 System.currentTimeMillis(),
-                selectedIds
+                selectedIds,
+                folderId
             )
         )
 
