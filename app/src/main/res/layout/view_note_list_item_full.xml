@@ -6,7 +6,7 @@
               android:layout_height="wrap_content">
 
     <View tools:background="#faa"
-          android:layout_width="2dp"
+          android:layout_width="4dp"
           android:id="@+id/vLabelColor"
           android:layout_height="match_parent"/>
 
