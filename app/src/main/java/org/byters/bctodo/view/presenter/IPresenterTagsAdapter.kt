@@ -12,5 +12,6 @@ interface IPresenterTagsAdapter {
     fun isSelected(position: Int): Boolean
     fun onClickItem(adapterPosition: Int)
     fun setListener(listenerPresenter: IPresenterTagsAdapterListener)
+    fun getItemColor(position: Int): Int?
 
 }

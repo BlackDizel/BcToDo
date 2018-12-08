@@ -46,6 +46,8 @@ class PresenterTagsAdapter(app: ApplicationToDo) :
 
     override fun getItemTitle(position: Int): String = cacheTags.getItemTitle(position - 1)
 
+    override fun getItemColor(position: Int): Int? = cacheTags.getItemColor(position - 1)
+
     override fun isSelected(position: Int): Boolean =
         if (isLastItem(position)) cacheTags.isSelectedWithoutTag() else cacheTags.isSelected(position - 1)
 
