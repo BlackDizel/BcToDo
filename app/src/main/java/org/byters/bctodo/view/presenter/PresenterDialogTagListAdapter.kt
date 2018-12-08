@@ -87,8 +87,8 @@ class PresenterDialogTagListAdapter(app: ApplicationToDo) : IPresenterDialogTagL
             notifyListener()
         }
 
-        override fun onEdit(title: String) {
-            cacheTags.updateTitle(cacheTags.getSelectedPopupId(), title)
+        override fun onEdit(title: String, colorSelected: Int?) {
+            cacheTags.updateTitle(cacheTags.getSelectedPopupId(), title, colorSelected)
             notifyListener()
         }
     }

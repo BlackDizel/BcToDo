@@ -93,8 +93,9 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
 
     override fun getSelectedPopupId(): String? = selectedPopupTagId
 
-    override fun updateTitle(selectedPopupId: String?, title: String) {
-        checkData().tags?.firstOrNull { it.id == selectedPopupId }?.title = title
+    override fun updateTitle(selectedPopupId: String?, title: String, colorSelected: Int?) {
+        checkData().tags?.firstOrNull { it.id == selectedPopupId }
+            ?.apply { this.title = title; this.color = colorSelected }
         saveData()
         notifyListeners()
     }

@@ -16,6 +16,6 @@ interface ICacheTags {
     fun removeTag(id: String)
     fun setSelectedPopup(position: Int)
     fun getSelectedPopupId(): String?
-    fun updateTitle(selectedPopupId: String?, title: String)
+    fun updateTitle(selectedPopupId: String?, title: String, colorSelected: Int?)
     fun getItemColor(position: Int): Int?
 }
