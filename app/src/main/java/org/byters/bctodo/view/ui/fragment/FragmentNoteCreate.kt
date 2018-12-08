@@ -93,7 +93,7 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
 
         override fun setLabelColor(color: Int) {
             if (!isAdded) return
-            ivLabelColor.setColorFilter(color)
+            ivLabel.setColorFilter(color)
             //ImageViewCompat.setImageTintList(ivLabelColor, ColorStateList.valueOf(color))
         }
     }

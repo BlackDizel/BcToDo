@@ -1,0 +1,20 @@
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/flLabelColor"
+        android:background="?selectableItemBackgroundBorderless"
+        android:layout_width="48dp"
+        android:padding="12dp"
+        android:layout_height="48dp">
+
+    <ImageView
+            android:id="@+id/ivLabelColor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_icon_label_white_24dp"/>
+
+    <ImageView
+            android:src="@drawable/ic_icon_label_outline_black_24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</FrameLayout>
