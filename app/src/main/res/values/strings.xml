@@ -12,5 +12,8 @@
     <string name="folder_edit">Edit folder</string>
     <string name="tag_delete">delete tag</string>
     <string name="tag_edit">edit tag</string>
+    <string name="note_title">Title</string>
+    <string name="hint_body">Text</string>
+    <string name="hint_folder">Folder</string>
 
 </resources>
