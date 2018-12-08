@@ -55,6 +55,8 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
 
     override fun getItemTitle(position: Int): String = checkData().tags?.opt(position)?.title ?: ""
 
+    override fun getItemColor(position: Int): Int? = checkData().tags?.opt(position)?.color
+
     override fun isSelectedWithoutTag(): Boolean = checkData().isSelectedWithoutTag
 
     override fun isSelected(position: Int): Boolean = checkData().tags?.opt(position)?.isSelected ?: false

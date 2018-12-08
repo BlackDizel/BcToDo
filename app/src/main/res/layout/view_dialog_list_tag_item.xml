@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+    <View
+            android:id="@+id/vLabelColor"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"/>
 
     <TextView
             android:ellipsize="end"
             android:lines="1"
             android:paddingStart="16dp"
             android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
             android:layout_gravity="center_vertical"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
@@ -21,7 +27,6 @@
             android:layout_height="48dp"
             android:padding="12dp"
             android:src="@drawable/ic_more_vert_white_24dp"
-            android:tint="?tintDrawable"
-            android:layout_gravity="end"/>
+            android:tint="?tintDrawable"/>
 
-</FrameLayout>
+</LinearLayout>

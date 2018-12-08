@@ -79,15 +79,18 @@ class AdapterDialogListTags(applicationToDo: ApplicationToDo) : AdapterBase() {
         View.OnClickListener {
 
         private val tvTitle: TextView
+        private val vLabelColor: View
 
         init {
             tvTitle = itemView.findViewById(R.id.tvTitle)
+            vLabelColor = itemView.findViewById(R.id.vLabelColor)
             itemView.findViewById<View>(R.id.ivTagMore).setOnClickListener(this)
         }
 
         override fun setData(position: Int) {
             val title = presenterDialogTagListAdapter.getItemTitle(position)
             tvTitle.text = if (TextUtils.isEmpty(title)) "" else title
+            vLabelColor.setBackgroundColor(presenterDialogTagListAdapter.getColorLabel(position) ?: Color.TRANSPARENT)
         }
 
         override fun onClick(v: View?) {

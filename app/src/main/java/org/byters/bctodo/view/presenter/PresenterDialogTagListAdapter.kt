@@ -70,6 +70,8 @@ class PresenterDialogTagListAdapter(app: ApplicationToDo) : IPresenterDialogTagL
 
     override fun getItemTitle(position: Int): String? = cacheTags.getItemTitle(position - 1)
 
+    override fun getColorLabel(position: Int): Int? = cacheTags.getItemColor(position - 1)
+
     enum class TypeEnum(val value: Int) {
         ITEM_ADD(1),
         ITEM(2)
