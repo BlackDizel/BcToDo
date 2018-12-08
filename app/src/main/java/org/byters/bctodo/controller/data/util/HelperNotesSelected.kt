@@ -59,6 +59,9 @@ class HelperNotesSelected(app: ApplicationToDo) :
 
     override fun getItemDate(position: Int): Long? = getItems().opt(position)?.date
 
+    override fun getItemLabelColor(position: Int): Int? = getItems().opt(position)?.colorLabel
+
+
     override fun addListener(listenerHelperNotes: IHelperNotesSelectedListener) {
         if (listeners == null) listeners = WeakHashMap()
         listeners!!.put(listenerHelperNotes::class.java.name, listenerHelperNotes)

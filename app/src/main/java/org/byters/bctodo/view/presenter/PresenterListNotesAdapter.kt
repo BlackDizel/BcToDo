@@ -72,6 +72,8 @@ class PresenterListNotesAdapter(app: ApplicationToDo) : IPresenterListNotesAdapt
         return dateFormat.format(date)
     }
 
+    override fun getColorLabel(position: Int): Int? = helperNotesSelected.getItemLabelColor(position)
+
     inner class ListenerCacheInterfaceState : ICacheInterfaceStateListener {
         override fun onStyleUpdate() {
             refListener?.get()?.onUpdateStyle()

@@ -13,5 +13,6 @@ interface IHelperNotesSelected {
     fun setQuery(query: String?)
     fun setFolderId(folderId: String?)
     fun getFolderId(): String?
+    fun getItemLabelColor(position: Int): Int?
 
 }

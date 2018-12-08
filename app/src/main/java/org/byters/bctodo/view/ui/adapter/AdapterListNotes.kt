@@ -1,5 +1,6 @@
 package org.byters.bctodo.view.ui.adapter
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.TextUtils
 import android.view.View
@@ -49,9 +50,11 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
         ViewHolderBase(resId, parent), View.OnClickListener {
 
         val tvDate: TextView
+        val vLabelColor: View
 
         init {
             tvDate = itemView.findViewById(R.id.tvDate)
+            vLabelColor = itemView.findViewById(R.id.vLabelColor)
             itemView.setOnClickListener(this)
         }
 
@@ -60,9 +63,11 @@ class AdapterListNotes(val rvItems: RecyclerView, app: ApplicationToDo) : Adapte
             tvDate.text = if (!TextUtils.isEmpty(text)) text else ""
 
             setFont(tvDate)
+
+            vLabelColor.setBackgroundColor(presenterListNotesAdapter.getColorLabel(position) ?: Color.TRANSPARENT)
         }
 
-        fun setFont(textView: TextView){
+        fun setFont(textView: TextView) {
             textView.setTypeface(if (presenterListNotesAdapter.getItemFont() == FontEnum.SANS) Typeface.SANS_SERIF else Typeface.SERIF);
         }
 

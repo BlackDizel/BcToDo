@@ -14,5 +14,6 @@ interface IPresenterListNotesAdapter {
     fun getItemBody(position: Int): String?
     fun getItemDate(position: Int): String?
     fun getItemFont(): FontEnum
+    fun getColorLabel(position: Int): Int?
 
 }
