@@ -45,6 +45,8 @@ class PresenterNoteCreateTagsAdapter(app: ApplicationToDo) :
 
     override fun getItemTitle(position: Int): String = cacheTags.getItemTitle(position - 1)
 
+    override fun getItemColor(position: Int): Int? = cacheTags.getItemColor(position - 1)
+
     override fun isSelected(position: Int): Boolean = cacheNoteCreate.isSelected(cacheTags.getId(position - 1))
 
     override fun onClickItem(adapterPosition: Int) {

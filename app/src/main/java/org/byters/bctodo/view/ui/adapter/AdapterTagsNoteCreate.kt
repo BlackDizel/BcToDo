@@ -1,5 +1,7 @@
 package org.byters.bctodo.view.ui.adapter
 
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
@@ -44,8 +46,20 @@ class AdapterTagsNoteCreate(applicationToDo: ApplicationToDo) : AdapterBase() {
         override fun setData(position: Int) {
             val title = presenterNoteCreatetagsAdapter.getItemTitle(position)
             tvTitle.setText(if (TextUtils.isEmpty(title)) "" else title)
-            tvTitle.setBackgroundResource(if (presenterNoteCreatetagsAdapter.isSelected(position)) R.drawable.bg_tag_selected else R.drawable.bg_tag_deselected)
+            tvTitle.background = getBackground(position)
+        }
 
+        private fun getBackground(position: Int): Drawable {
+            if (!presenterNoteCreatetagsAdapter.isSelected(position))
+                return itemView.resources.getDrawable(R.drawable.bg_tag_deselected)
+
+            val drawable = itemView.resources.getDrawable(R.drawable.bg_tag_selected)
+
+            val color = presenterNoteCreatetagsAdapter.getItemColor(position) ?: return drawable
+
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC)
+
+            return drawable
         }
 
         override fun onClick(v: View?) {

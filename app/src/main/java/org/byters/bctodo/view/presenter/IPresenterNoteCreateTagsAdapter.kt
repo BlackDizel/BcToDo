@@ -11,5 +11,6 @@ interface IPresenterNoteCreateTagsAdapter {
     fun onClickItem(adapterPosition: Int)
     fun onClickSettings()
     fun setListener(listenerPresenter: IPresenterNoteCreateTagsAdapterListener)
+    fun getItemColor(position: Int): Int?
 
 }
