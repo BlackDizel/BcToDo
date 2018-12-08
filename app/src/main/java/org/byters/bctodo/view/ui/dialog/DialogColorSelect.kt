@@ -3,6 +3,7 @@ package org.byters.bctodo.view.ui.dialog
 import android.content.Context
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
+import com.jaredrummler.android.colorpicker.ColorShape
 import org.byters.bctodo.view.ui.activity.ActivityBase
 import org.byters.bctodo.view.ui.dialog.callback.IDialogColorSelectListener
 import java.lang.ref.WeakReference
@@ -22,7 +23,12 @@ class DialogColorSelect(
         refContext = WeakReference(context)
         refListener = WeakReference(listener)
 
-        dialog = ColorPickerDialog.newBuilder().create()
+        dialog = ColorPickerDialog.newBuilder()
+            .setAllowCustom(false)
+            .setColorShape(ColorShape.SQUARE)
+            .setShowColorShades(false)
+            .create()
+
         dialog.setColorPickerDialogListener(ListenerDialog())
     }
 
