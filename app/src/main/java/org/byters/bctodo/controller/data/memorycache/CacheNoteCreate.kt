@@ -18,7 +18,7 @@ class CacheNoteCreate(app: ApplicationToDo) : ICacheNoteCreate {
         else selectedIds!!.remove(id)
     }
 
-    override fun getSelectedIds(): ArrayList<String>? = ArrayList(selectedIds)
+    override fun getSelectedIds(): ArrayList<String>? = if (selectedIds == null) null else ArrayList(selectedIds)
 
     override fun setColor(color: Int) {
         this.colorLabel = color
