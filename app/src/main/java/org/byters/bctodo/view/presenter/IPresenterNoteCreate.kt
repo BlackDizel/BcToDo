@@ -7,5 +7,6 @@ interface IPresenterNoteCreate {
     fun onClickSave(title: String, body: String)
     fun onCreateView()
     fun onClickFolder()
+    fun onClickLabelColor()
 
 }

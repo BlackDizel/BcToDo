@@ -6,4 +6,5 @@ interface IPresenterNoteCreateListener {
 
     fun finish()
     fun setData(font: Typeface, itemTitle: String?)
+    fun setLabelColor(color: Int)
 }

@@ -44,7 +44,8 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
         title: String?,
         body: String?,
         selectedIds: ArrayList<String>?,
-        folderId: String?
+        folderId: String?,
+        colorLabel: Int?
     ) {
         if (title == null && body == null) return
 
@@ -57,7 +58,8 @@ class CacheNotes(app: ApplicationToDo) : ICacheNotes {
                 body,
                 System.currentTimeMillis(),
                 selectedIds,
-                folderId
+                folderId,
+                colorLabel
             )
         )
 

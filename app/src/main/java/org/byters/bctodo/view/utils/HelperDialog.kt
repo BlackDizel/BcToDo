@@ -3,6 +3,7 @@ package org.byters.bctodo.view.utils
 import android.content.Context
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.view.ui.dialog.*
+import org.byters.bctodo.view.ui.dialog.callback.IDialogColorSelectListener
 import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
 import org.byters.bctodo.view.ui.dialog.callback.IDialogTagOptionsListener
 import java.lang.ref.WeakReference
@@ -55,5 +56,9 @@ class HelperDialog(app: ApplicationToDo) : IHelperDialog {
 
     }
 
+    override fun showDialogColorSelect(listener: IDialogColorSelectListener) {
+        val context = refContext?.get() ?: return
+        showDialog(DialogColorSelect(context, listener))
+    }
 
 }

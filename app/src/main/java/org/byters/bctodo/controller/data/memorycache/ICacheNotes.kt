@@ -10,8 +10,10 @@ interface ICacheNotes {
         title: String?,
         body: String?,
         selectedIds: ArrayList<String>?,
-        folderId: String?
+        folderId: String?,
+        colorLabel: Int?
     )
+
     fun setSelectedNote(adapterPosition: Int)
     fun getTitleSelected(): String?
     fun getBodySelected(): String?
@@ -26,6 +28,7 @@ interface ICacheNotes {
         query: String?,
         folderId: String?
     ): List<ModelNote>?
+
     fun setSelectedNote(id: String?)
     fun addListener(listenerCacheNotes: ICacheNotesListener)
     fun removeTags(id: String)

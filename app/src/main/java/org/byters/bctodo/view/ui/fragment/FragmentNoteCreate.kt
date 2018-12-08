@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_note_create.*
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.view.presenter.IPresenterNoteCreate
@@ -27,6 +29,7 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
     private lateinit var etTitle: EditText
     private lateinit var etBody: EditText
     private lateinit var tvFolder: TextView
+    private lateinit var ivLabel: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +49,10 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
         etTitle = view.findViewById(R.id.etTitle)
         etBody = view.findViewById(R.id.etBody)
         tvFolder = view.findViewById(R.id.tvFolder)
+        ivLabel = view.findViewById(R.id.ivLabelColor)
         view.findViewById<View>(R.id.tvSave).setOnClickListener(this)
         view.findViewById<View>(R.id.ivFolderEdit).setOnClickListener(this)
+        view.findViewById<View>(R.id.flLabelColor).setOnClickListener(this)
 
         view.findViewById<RecyclerView>(R.id.rvTags).apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -58,14 +63,20 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v == null) return
+
         if (v.id == R.id.tvSave)
             presenterNoteCreate.onClickSave(etTitle.text.toString(), etBody.text.toString())
+
         if (v.id == R.id.ivFolderEdit)
             presenterNoteCreate.onClickFolder()
+
+        if (v.id == R.id.flLabelColor)
+            presenterNoteCreate.onClickLabelColor()
     }
 
     inner class PresenterListener : IPresenterNoteCreateListener {
         override fun setData(font: Typeface, itemTitle: String?) {
+            if (!isAdded) return
             setFont(etTitle, etBody, font = font)
             tvFolder.text = if (TextUtils.isEmpty(itemTitle)) "" else itemTitle
         }
@@ -78,6 +89,12 @@ class FragmentNoteCreate : FragmentBase(), View.OnClickListener {
         fun setFont(vararg items: TextView, font: Typeface) {
             items.forEach { it.setTypeface(font) }
 
+        }
+
+        override fun setLabelColor(color: Int) {
+            if (!isAdded) return
+            ivLabelColor.setColorFilter(color)
+            //ImageViewCompat.setImageTintList(ivLabelColor, ColorStateList.valueOf(color))
         }
     }
 }

@@ -13,6 +13,8 @@ import org.byters.bctodo.controller.data.util.callback.IHelperNotesSelectedListe
 import org.byters.bctodo.model.FontEnum
 import org.byters.bctodo.view.INavigator
 import org.byters.bctodo.view.presenter.callback.IPresenterNoteCreateListener
+import org.byters.bctodo.view.ui.dialog.callback.IDialogColorSelectListener
+import org.byters.bctodo.view.utils.IHelperDialog
 import org.byters.bctodo.view.utils.IHelperPopup
 import java.lang.ref.WeakReference
 import javax.inject.Inject
@@ -40,14 +42,20 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
     @Inject
     lateinit var cacheFolders: ICacheFolders
 
+    @Inject
+    lateinit var helperDialog: IHelperDialog
+
     var refListener: WeakReference<IPresenterNoteCreateListener>? = null
 
     private var listenerFolders: IHelperNotesSelectedListener
+
+    private var listenerDialogColorSelect: IDialogColorSelectListener
 
     init {
         app.component.inject(this)
         listenerFolders = ListenerFolders()
         helperNotesSelected.addListener(listenerFolders)
+        listenerDialogColorSelect = ListenerDialogColorSelect()
     }
 
     override fun onClickSave(title: String, body: String) {
@@ -55,7 +63,13 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
             helperPopup.showToast(R.string.note_empty);
             return
         }
-        cacheNotes.add(title, body, cacheNoteCreate.getSelectedIds(), helperNotesSelected.getFolderId())
+        cacheNotes.add(
+            title,
+            body,
+            cacheNoteCreate.getSelectedIds(),
+            helperNotesSelected.getFolderId(),
+            cacheNoteCreate.getColorLabel()
+        )
         refListener?.get()?.finish()
     }
 
@@ -77,6 +91,17 @@ class PresenterNoteCreate(app: ApplicationToDo) : IPresenterNoteCreate {
                 if (cacheInterfaceState.getFont() == FontEnum.SANS) Typeface.SANS_SERIF else Typeface.SERIF,
                 cacheFolders.getItemTitle(helperNotesSelected.getFolderId())
             )
+    }
+
+    override fun onClickLabelColor() {
+        helperDialog.showDialogColorSelect(listenerDialogColorSelect)
+    }
+
+    inner class ListenerDialogColorSelect : IDialogColorSelectListener {
+        override fun onColorSelect(color: Int) {
+            cacheNoteCreate.setColor(color)
+            refListener?.get()?.setLabelColor(color)
+        }
     }
 
     inner class ListenerFolders : IHelperNotesSelectedListener {
