@@ -10,15 +10,19 @@ import java.lang.ref.WeakReference
 
 class HelperDialog(app: ApplicationToDo) : IHelperDialog {
 
+    private var refDialogDrawer: WeakReference<DialogBase>? = null
     private var refDialog: WeakReference<DialogBase>? = null
 
     private var refContext: WeakReference<Context>? = null
 
-    private var refDialogFolderOptions: WeakReference<DialogFolderOptions>? = null
-    private var refDialogTagOptions: WeakReference<DialogTagOptions>? = null
-
     override fun set(context: Context) {
         refContext = WeakReference(context)
+    }
+
+    private fun showDialogDrawer(dialog: DialogBase) {
+        refDialogDrawer?.get()?.cancel()
+        refDialogDrawer = WeakReference(dialog)
+        refDialogDrawer?.get()?.show()
     }
 
     private fun showDialog(dialog: DialogBase) {
@@ -30,30 +34,23 @@ class HelperDialog(app: ApplicationToDo) : IHelperDialog {
 
     override fun showDialogTagList() {
         val context = refContext?.get() ?: return
-        showDialog(DialogTagList(context))
+        showDialogDrawer(DialogTagList(context))
     }
 
 
     override fun showDialogFolders() {
         val context = refContext?.get() ?: return
-        showDialog(DialogFolders(context))
+        showDialogDrawer(DialogFolders(context))
     }
 
     override fun showDialogFolderOptions(listener: IDialogFolderMoreListener) {
         val context = refContext?.get() ?: return
-
-        refDialogFolderOptions?.get()?.cancel()
-        refDialogFolderOptions = WeakReference(DialogFolderOptions(context, listener))
-        refDialogFolderOptions?.get()?.show()
+        showDialog(DialogFolderOptions(context, listener))
     }
 
     override fun showDialogTagOptions(listener: IDialogTagOptionsListener) {
         val context = refContext?.get() ?: return
-
-        refDialogTagOptions?.get()?.cancel()
-        refDialogTagOptions = WeakReference(DialogTagOptions(context, listener))
-        refDialogTagOptions?.get()?.show()
-
+        showDialog(DialogTagOptions(context, listener))
     }
 
     override fun showDialogColorSelect(listener: IDialogColorSelectListener) {
