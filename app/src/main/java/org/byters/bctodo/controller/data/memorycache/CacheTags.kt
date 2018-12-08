@@ -31,10 +31,10 @@ class CacheTags(app: ApplicationToDo) : ICacheTags {
         return data!!
     }
 
-    override fun addTag(title: String) {
+    override fun addTag(title: String, color: Int?) {
         if (checkData().tags == null)
             checkData().tags = ArrayList()
-        checkData().tags!!.add(ModelTag(title = title))
+        checkData().tags!!.add(ModelTag(title = title, color = color))
         saveData()
         notifyListeners()
     }

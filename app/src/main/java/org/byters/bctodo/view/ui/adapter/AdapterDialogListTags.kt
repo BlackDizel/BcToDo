@@ -1,10 +1,12 @@
 package org.byters.bctodo.view.ui.adapter
 
+import android.graphics.Color
 import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
@@ -41,19 +43,29 @@ class AdapterDialogListTags(applicationToDo: ApplicationToDo) : AdapterBase() {
         View.OnClickListener, TextView.OnEditorActionListener {
 
         private val etTitle: EditText
+        private val ivLabelColor: ImageView
 
         init {
             itemView.setOnClickListener(this)
+            itemView.findViewById<View>(R.id.flLabelColor).setOnClickListener(this)
+
             etTitle = itemView.findViewById(R.id.etTitle)
+            ivLabelColor = itemView.findViewById(R.id.ivLabelColor)
+
             etTitle.setOnEditorActionListener(this)
         }
 
         override fun setData(position: Int) {
             etTitle.setText("")
+            ivLabelColor.setColorFilter(presenterDialogTagListAdapter.getColorLabelTagCreate() ?: Color.WHITE)
         }
 
         override fun onClick(v: View?) {
-            presenterDialogTagListAdapter.onClickAdd(etTitle.text.toString())
+            if (v == null) return
+            if (v == itemView)
+                presenterDialogTagListAdapter.onClickAdd(etTitle.text.toString())
+            if (v.id == R.id.flLabelColor)
+                presenterDialogTagListAdapter.onClickLabelColor()
         }
 
         override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {

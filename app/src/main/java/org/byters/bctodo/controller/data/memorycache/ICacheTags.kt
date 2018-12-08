@@ -12,7 +12,7 @@ interface ICacheTags {
     fun addListener(listener: ICacheTagListener)
     fun getSelectedIds(): Iterable<String>?
     fun getId(position: Int): String?
-    fun addTag(title: String)
+    fun addTag(title: String, color:Int?)
     fun removeTag(id: String)
     fun setSelectedPopup(position: Int)
     fun getSelectedPopupId(): String?

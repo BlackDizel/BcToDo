@@ -5,6 +5,7 @@ import org.byters.bctodo.ApplicationToDo
 import org.byters.bctodo.R
 import org.byters.bctodo.controller.data.memorycache.ICacheNotes
 import org.byters.bctodo.controller.data.memorycache.ICacheTags
+import org.byters.bctodo.view.ui.dialog.callback.IDialogColorSelectListener
 import org.byters.bctodo.view.ui.dialog.callback.IDialogTagOptionsListener
 import org.byters.bctodo.view.utils.IHelperDialog
 import org.byters.bctodo.view.utils.IHelperPopup
@@ -25,13 +26,18 @@ class PresenterDialogTagListAdapter(app: ApplicationToDo) : IPresenterDialogTagL
     @Inject
     lateinit var helperDialog: IHelperDialog
 
+    private var colorLabel: Int? = null
+
     private var refListener: WeakReference<IPresenterDialogTagListAdapterListener>? = null
 
     private var listenerDialogOptions: IDialogTagOptionsListener
 
+    private var listenerDialogColorLabel: IDialogColorSelectListener
+
     init {
         app.component.inject(this)
         listenerDialogOptions = ListenerDialogOptions()
+        listenerDialogColorLabel = ListenerDialogLabelColor()
     }
 
     override fun setListener(listenerPresenter: IPresenterDialogTagListAdapterListener) {
@@ -48,7 +54,7 @@ class PresenterDialogTagListAdapter(app: ApplicationToDo) : IPresenterDialogTagL
         if (TextUtils.isEmpty(title)) {
             helperPopup.showToast(R.string.error_tag_title_empty)
         }
-        cacheTags.addTag(title)
+        cacheTags.addTag(title, colorLabel)
         notifyListener()
     }
 
@@ -84,6 +90,21 @@ class PresenterDialogTagListAdapter(app: ApplicationToDo) : IPresenterDialogTagL
             notifyListener()
         }
     }
+
+    override fun onClickLabelColor() {
+        helperDialog.showDialogColorSelect(listenerDialogColorLabel)
+    }
+
+    override fun getColorLabelTagCreate(): Int? = colorLabel
+
+    inner class ListenerDialogLabelColor : IDialogColorSelectListener {
+        override fun onColorSelect(color: Int) {
+            colorLabel = color
+            refListener?.get()?.updateData()
+        }
+
+    }
+
 
 }
 

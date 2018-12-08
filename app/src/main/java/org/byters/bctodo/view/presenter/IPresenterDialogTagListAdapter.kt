@@ -8,5 +8,7 @@ interface IPresenterDialogTagListAdapter {
     fun getItemTitle(position: Int): String?
     fun setListener(listenerPresenter: IPresenterDialogTagListAdapterListener)
     fun onClickMore(adapterPosition: Int)
+    fun getColorLabelTagCreate(): Int?
+    fun onClickLabelColor()
 
 }

@@ -14,8 +14,13 @@
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginEnd="48dp"/>
+            android:layout_marginEnd="96dp"/>
 
+    <include layout="@layout/view_label_color"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="end"
+             android:layout_marginEnd="48dp"/>
 
     <ImageView
             android:background="?selectableItemBackground"
