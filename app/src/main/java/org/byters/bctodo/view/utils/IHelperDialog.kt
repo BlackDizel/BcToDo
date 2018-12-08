@@ -10,7 +10,10 @@ interface IHelperDialog {
 
     fun set(context: Context)
     fun showDialogFolders()
-    fun showDialogFolderOptions(listener: IDialogFolderMoreListener)
+    fun showDialogFolderOptions(
+        listener: IDialogFolderMoreListener,
+        showDelete: Boolean
+    )
     fun showDialogTagOptions(listener: IDialogTagOptionsListener)
     fun showDialogColorSelect(listener: IDialogColorSelectListener)
 }

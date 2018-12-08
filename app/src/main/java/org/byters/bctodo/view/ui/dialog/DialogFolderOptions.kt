@@ -11,7 +11,11 @@ import org.byters.bctodo.R
 import org.byters.bctodo.view.ui.dialog.callback.IDialogFolderMoreListener
 import java.lang.ref.WeakReference
 
-class DialogFolderOptions(context: Context, listener: IDialogFolderMoreListener?) : DialogBase, View.OnClickListener,
+class DialogFolderOptions(
+    context: Context,
+    listener: IDialogFolderMoreListener?,
+    val showDelete: Boolean
+) : DialogBase, View.OnClickListener,
     TextView.OnEditorActionListener {
 
     private val refListener: WeakReference<IDialogFolderMoreListener?>
@@ -21,6 +25,8 @@ class DialogFolderOptions(context: Context, listener: IDialogFolderMoreListener?
     lateinit var vEdit: View
 
     lateinit var tvTitle: TextView
+
+    lateinit var tvDelete: View
 
     init {
 
@@ -34,13 +40,18 @@ class DialogFolderOptions(context: Context, listener: IDialogFolderMoreListener?
     }
 
     private fun initViews(view: View) {
-        view.findViewById<View>(R.id.tvAdd).setOnClickListener(this)
-        view.findViewById<View>(R.id.tvDelete).setOnClickListener(this)
-        view.findViewById<View>(R.id.tvEdit).setOnClickListener(this)
-        view.findViewById<View>(R.id.ivConfirm).setOnClickListener(this)
+        tvDelete = view.findViewById(R.id.tvDelete)
         vEdit = view.findViewById(R.id.flEdit)
         tvTitle = view.findViewById(R.id.etTitle)
+
+        tvDelete.setOnClickListener(this)
+        view.findViewById<View>(R.id.tvAdd).setOnClickListener(this)
+        view.findViewById<View>(R.id.tvEdit).setOnClickListener(this)
+        view.findViewById<View>(R.id.ivConfirm).setOnClickListener(this)
+
         tvTitle.setOnEditorActionListener(this)
+
+        tvDelete.visibility = if (showDelete) View.VISIBLE else View.GONE
     }
 
     override fun onClick(v: View?) {

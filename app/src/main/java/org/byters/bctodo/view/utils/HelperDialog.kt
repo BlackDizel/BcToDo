@@ -43,9 +43,12 @@ class HelperDialog(app: ApplicationToDo) : IHelperDialog {
         showDialogDrawer(DialogFolders(context))
     }
 
-    override fun showDialogFolderOptions(listener: IDialogFolderMoreListener) {
+    override fun showDialogFolderOptions(
+        listener: IDialogFolderMoreListener,
+        showDelete: Boolean
+    ) {
         val context = refContext?.get() ?: return
-        showDialog(DialogFolderOptions(context, listener))
+        showDialog(DialogFolderOptions(context, listener, showDelete))
     }
 
     override fun showDialogTagOptions(listener: IDialogTagOptionsListener) {

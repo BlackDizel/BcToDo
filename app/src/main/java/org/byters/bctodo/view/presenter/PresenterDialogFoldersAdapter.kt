@@ -73,7 +73,10 @@ class PresenterDialogFoldersAdapter(app: ApplicationToDo) : IPresenterDialogFold
 
     override fun onClickMore(folderId: String?, adapterPosition: Int) {
         cacheFolders.setSelectedId(getFolderId(folderId, adapterPosition))
-        navigator.navigateFolderOptions(ListenerFolderEdit())
+        navigator.navigateFolderOptions(
+            ListenerFolderEdit(),
+            cacheFolders.getFolderId(folderId, adapterPosition) != cacheFolders.getFolderIdRoot()
+        )
     }
 
     override fun onClickFolderAddCancel() {

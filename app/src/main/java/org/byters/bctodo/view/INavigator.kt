@@ -14,5 +14,8 @@ interface INavigator {
     fun navigateFolders()
     fun navigteErrorPermission()
     fun navigateCurrent()
-    fun navigateFolderOptions(listener: IDialogFolderMoreListener)
+    fun navigateFolderOptions(
+        listener: IDialogFolderMoreListener,
+        showDelete: Boolean
+    )
 }

@@ -87,8 +87,11 @@ class Navigator(app: ApplicationToDo) : INavigator {
     override fun navigateCurrent() {
     }
 
-    override fun navigateFolderOptions(listener: IDialogFolderMoreListener) {
-        helperDialog.showDialogFolderOptions(listener)
+    override fun navigateFolderOptions(
+        listener: IDialogFolderMoreListener,
+        showDelete: Boolean
+    ) {
+        helperDialog.showDialogFolderOptions(listener, showDelete)
     }
 
 }
